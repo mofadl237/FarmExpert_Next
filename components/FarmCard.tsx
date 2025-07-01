@@ -1,12 +1,11 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { IFarm } from "@/interface";
-import { User, Mail, Home, Edit, Tag, Loader } from "lucide-react";
+import { User, Mail, Home,  Tag,  } from "lucide-react";
 import {
   useDeleteFarmMutation,
-  useUpdateFarmMutation,
 } from "@/store/services/Farm";
 import AlertDelete from "./AlertDelete";
+import ModelEditFarm from "./ModelEditFarm";
 
 interface IProps {
   farm: IFarm;
@@ -15,16 +14,8 @@ interface IProps {
 export default function FarmCard({ farm }: IProps) {
   //1- state
   const [deleteFarm, { isLoading: loadingDelete }] = useDeleteFarmMutation();
-  const [updateFarm, { isLoading: loadingUpdate }] = useUpdateFarmMutation();
   //2- handler
-  const onEdit = async (id: number) => {
-  try {
-    const res = await updateFarm({ id, name: "Esmail" }).unwrap();
-    console.log("تم التحديث بنجاح:", res);
-  } catch (error) {
-    console.error("خطأ أثناء التحديث:", error);
-  }
-};
+
 
   const onDelete = (id: number) => {
     deleteFarm(id);
@@ -53,20 +44,7 @@ export default function FarmCard({ farm }: IProps) {
         </div>
 
         <div className="flex justify-between  gap-2 pt-3">
-          <Button
-            variant="outline"
-            className="flex-auto cursor-pointer"
-            onClick={() => onEdit(farm.id)}
-          >
-            {loadingUpdate ? (
-              <Loader />
-            ) : (
-              <>
-                <Edit className="w-4 h-4 mr-1" />
-                Edit
-              </>
-            )}
-          </Button>
+          <ModelEditFarm farm={farm}/>
           <AlertDelete
             loadingDelete={loadingDelete}
             Delete={() => onDelete(farm.id)}
