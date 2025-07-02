@@ -2,23 +2,43 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const links = [
-  { href: "/vet", label: "Vet" },
-  { href: "/e-commerce", label: "E-commerce" },
-  { href: "/dashboard", label: "Dashboard" },
+  { path: "vet", label: "Vet" },
+  { path: "e-commerce", label: "E-commerce" },
+  { path: "dashboard", label: "Dashboard" },
 ];
 
 export default function Navbar() {
+  //1-State
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const locale = useLocale();
+
+useEffect(() => {
+  const handleScroll = () => {
+    if (window.scrollY > 50) {
+      setScrolled(true);
+    } else {
+      setScrolled(false);
+    }
+  };
+
+  window.addEventListener("scroll", handleScroll);
+  return () => window.removeEventListener("scroll", handleScroll);
+}, []);
+
 
   return (
-<div className="fixed top-3 left-1/2 -translate-x-1/2 z-50 w-full max-w-7xl bg-secondary text-primary rounded-md shadow-md">
+<div className={cn(
+    "fixed top-3 left-1/2 -translate-x-1/2 z-50 w-full max-w-7xl rounded-md  transition-colors duration-300",
+    scrolled ? "bg-secondary shadow-md text-primary" : "bg-transparent text-white"
+  )}>
       <nav className="container mx-auto flex items-center justify-between px-4 py-3 py-3shadow-sm">
       {/* Logo */}
       <Link href="/" className="flex items-center">
@@ -34,11 +54,12 @@ export default function Navbar() {
       {/* Desktop Links */}
       <div className="hidden md:flex gap-6">
         {links.map((link) => (
-          <NavLink key={link.href} href={link.href}>
+          <NavLink key={link.path} href={`/${locale}/${link.path}`}>
             {link.label}
           </NavLink>
         ))}
         <ModeToggle/>
+        <LanguageSwitcher/>
       </div>
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetTrigger asChild>
@@ -62,8 +83,8 @@ export default function Navbar() {
             <nav className="flex flex-col gap-4 p-4">
               {links.map((link) => (
                 <NavLink
-                  key={link.href}
-                  href={link.href}
+                  key={link.path}
+                  href={`/${locale}/${link.path}`}
                   onClick={() => setOpen(false)}
                   className="text-lg"
                 >
@@ -71,6 +92,7 @@ export default function Navbar() {
                 </NavLink>
               ))}
               <ModeToggle/>
+              <LanguageSwitcher/>
             </nav>
           </div>
         </SheetContent>
@@ -82,6 +104,8 @@ export default function Navbar() {
 
 import { usePathname } from "next/navigation";
 import { ModeToggle } from "./DarkMode";
+import { LanguageSwitcher } from "./LanguageSwitch";
+import { useLocale } from "next-intl";
 type NavLinkProps = React.ComponentProps<typeof Link> & {
   children: React.ReactNode;
 };

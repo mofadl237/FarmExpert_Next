@@ -7,3 +7,13 @@ export interface  IFarm  {
       email: string,
     },
   };
+
+export interface IManager {
+        id: number,
+        name: string,
+        email:string,
+        farm: {
+            id: number,
+            name: string
+        }
+    }

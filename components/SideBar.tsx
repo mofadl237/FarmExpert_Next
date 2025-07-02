@@ -13,39 +13,44 @@ import {
 } from "@/components/ui/sidebar"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { useLocale } from "next-intl"
 
-// Menu items.
-const items = [
-  {
-    title: "Home",
-    url: "/dashboard",
-    icon: Home,
-  },
-  {
-    title: "All Farms",
-    url: "/dashboard/farms",
-    icon: Tractor,
-  },
-  {
-    title: "All Manager",
-    url: "/dashboard/manager",
-    icon: Calendar,
-  },
-  {
-    title: "Farm Requesters",
-    url: "/dashboard/requests",
-    icon: Inbox,
-  },
-  {
-    title: "Settings",
-    url: "/dashboard/",
-    icon: Settings,
-  },
-]
+
 
 export function AppSidebar() {
   //1-state 
   const pathname =usePathname();
+  const locale = useLocale();
+  //For Admin
+  const items = [
+ {
+      title: "Home",
+      url: `/${locale}/dashboard`,
+      icon: Home,
+    },
+    {
+      title: "All Farms",
+      url: `/${locale}/dashboard/farms`,
+      icon: Tractor,
+    },
+    {
+      title: "All Manager",
+      url: `/${locale}/dashboard/manager`,
+      icon: Calendar,
+    },
+    {
+      title: "Farm Requesters",
+      url: `/${locale}/dashboard/requests`,
+      icon: Inbox,
+    },
+    {
+      title: "Settings",
+      url: `/${locale}/dashboard/settings`,
+      icon: Settings,
+    },
+]
+
+
   return (
     <Sidebar>
       <SidebarContent>
