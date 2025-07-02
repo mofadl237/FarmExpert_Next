@@ -26,7 +26,7 @@ import { Input } from "@/components/ui/input";
 
 import { formSchema } from "@/validation";
 import { z } from "zod";
-import { Edit, LoaderIcon } from "lucide-react";
+import { Edit } from "lucide-react";
 import { useState } from "react";
 import { IManager } from "@/interface";
 
