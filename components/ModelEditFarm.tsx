@@ -58,7 +58,7 @@ const ModelEditFarm = ({farm}:IProps) => {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="outline"><Edit/> Edit Farm</Button>
+        <Button variant="outline" className="flex-auto"><Edit/> Edit Farm</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>

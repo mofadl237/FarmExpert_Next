@@ -43,7 +43,7 @@ export default function FarmCard({ farm }: IProps) {
           <span>{farm?.manager?.email ? farm?.manager?.email : "Email"}</span>
         </div>
 
-        <div className="flex justify-between  gap-2 pt-3">
+        <div className="flex justify-between gap-2 pt-3">
           <ModelEditFarm farm={farm}/>
           <AlertDelete
             loadingDelete={loadingDelete}

@@ -21,7 +21,7 @@ export default function AlertDelete({ Delete, loadingDelete }: IProps) {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button variant="destructive" className="cursor-pointer">
+        <Button variant="destructive" className="cursor-pointer flex-auto">
           {loadingDelete ? (
             <Loader className="animate-spin w-4 h-4" />
           ) : (

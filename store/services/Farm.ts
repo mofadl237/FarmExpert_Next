@@ -16,16 +16,20 @@ export const FarmApiSlice = createApi({
     addFarm: build.mutation<void, { name: string }>({
       query: (body) => ({
         url: "/Farms/add",
-        method: "post",
+        method: "POST",
         body,
       }),
+      invalidatesTags: ["Farms"],
     }),
+
     deleteFarm: build.mutation<void, number>({
       query: (id) => ({
         url: `/Farms/delete/${id}`,
         method: "DELETE",
       }),
+      invalidatesTags: ["Farms"],
     }),
+
     updateFarm: build.mutation<void, { id: number; name: string }>({
       query: ({ id, name }) => ({
         url: `/Farms/update/${id}`,
@@ -34,6 +38,7 @@ export const FarmApiSlice = createApi({
           name,
         },
       }),
+      invalidatesTags: ["Farms"],
     }),
   }),
 });
