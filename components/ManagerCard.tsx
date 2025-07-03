@@ -3,12 +3,17 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Mail, User, BadgeCheck, Home } from "lucide-react";
 import { IManager } from "@/interface";
+import ModelEditManager from "./ModelEditManager";
+import AlertDelete from "./AlertDelete";
+import { useDeleteManagerMutation } from "@/store/services/Manager";
 
 interface IProps {
   manager: IManager;
 }
 
 export default function ManagerCard({ manager }: IProps) {
+  //1- state
+  const [deleteManager,{isLoading}]=useDeleteManagerMutation();
   return (
     <Card className="w-full max-w-md mx-auto shadow-md">
       <CardHeader>
@@ -44,6 +49,13 @@ export default function ManagerCard({ manager }: IProps) {
             {manager?.farm?.id}
           </div>
         </div>
+         <div className="flex justify-between gap-2 pt-3">
+                  <ModelEditManager manager={manager}/>
+                  <AlertDelete
+                    loadingDelete={isLoading}
+                    Delete={() => deleteManager(manager.id)}
+                  />
+                </div>
       </CardContent>
     </Card>
   );

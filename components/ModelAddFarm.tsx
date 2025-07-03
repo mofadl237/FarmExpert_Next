@@ -46,7 +46,6 @@ export default function ModelAddFarm() {
   // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof formSchema>) {
     form.reset();
-    console.log("DataFarm Name ===> ",values);
     addFarm(values)
     //Hook Add
     

@@ -7,7 +7,7 @@ const FarmRender = () => {
   const { isError, isLoading, data, error } = useGetFarmsQuery();
     // const [ deleteFarm ]=useDeleteFarmMutation();
 
-console.log(data)
+
   if (isError) {
     return (
       <div className="text-red-500">

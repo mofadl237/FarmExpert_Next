@@ -17,9 +17,7 @@ import { z } from "zod"
       message: "Email must be a valid format like example@email.com",
     }),
   password: z.string().min(3, {
-    message: "Name Manager must be at least 3 characters.",
+    message: "Password Manager must be at least 3 characters.",
   }),
-  farmId: z.string().min(3, {
-    message: "Name Manager must be at least 3 characters.",
-  }),
+  farmId: z.string(),
 })

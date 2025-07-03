@@ -3,6 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
 import {
   Dialog,
   DialogClose,
@@ -24,46 +25,69 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
-import { formSchema } from "@/validation";
+import { formManager } from "@/validation";
 import { z } from "zod";
-import { LoaderIcon, Plus } from "lucide-react";
+import { Edit, LoaderIcon } from "lucide-react";
 import { useState } from "react";
-import { useAddFarmMutation } from "@/store/services/Farm";
+import { useAddManagerMutation } from "@/store/services/Manager";
 
-export default function ModelAddManager() {
-    
-    const [open,setOpen]=useState(false);
-    //Use RTK Add
-  const [addFarm, { isLoading }] = useAddFarmMutation();
+const ModelAddManager = () => {
+  const [open, setOpen] = useState(false);
+  const [addManager, { isLoading }] = useAddManagerMutation();
+
   //2- Handler
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof formManager>>({
+    resolver: zodResolver(formManager),
     defaultValues: {
       name: "",
+      farmId: "",
+      email: "",
+      password: "",
     },
   });
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof formManager>) {
     form.reset();
-    console.log("DataFarm Name ===> ",values);
-    addFarm(values)
-    //Hook Add
-    
-    setOpen(false)
 
+    //  update ID Because Type Number in Db & Get For String
+    const { farmId, ...rest } = values;
+
+    const finalFarmId = Number(farmId);
+    const updatedValues = {
+      ...rest,
+      farmId: finalFarmId,
+    };
+
+    try {
+      await addManager(updatedValues).unwrap();
+      toast.success("Manager added successfully.");
+      setOpen(false);
+    } catch (error: any) {
+      
+      const errorMessage =
+        error?.data?.message || "Something went wrong while adding the manager.";
+      toast.error(errorMessage);
+    }
+
+    //  addManager(updatedValues);
+    //  toast.success("Manager added successfully.");
+    setOpen(false);
   }
   //3- Render
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="outline"><Plus/> New Manager</Button>
+        <Button variant="outline" className="flex-auto">
+          <Edit /> Add manager
+        </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Add Farm</DialogTitle>
+          <DialogTitle>Add manager</DialogTitle>
           <DialogDescription>
-            Do You Want Add New Farm. Click save when you&apos;re done.
+            Do You Want Add New manager. Click save when you&apos;re done.
           </DialogDescription>
         </DialogHeader>
 
@@ -71,30 +95,76 @@ export default function ModelAddManager() {
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <FormField
               control={form.control}
-              name="name"
+              name="farmId"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Farm Name</FormLabel>
+                  <FormLabel>manager Farm ID</FormLabel>
                   <FormControl>
-                    <Input placeholder="Farm " {...field} />
+                    <Input {...field} />
                   </FormControl>
                   <FormDescription>
-                    This is your public display name.
+                    This is Add Manager For Farm.
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
             />
-        <DialogFooter>
-          <DialogClose asChild>
-            <Button variant="outline" >Cancel</Button>
-          </DialogClose>
-          <Button type="submit" >{isLoading ? <LoaderIcon/> : 'Add'}</Button>
-        </DialogFooter>
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>manager Name</FormLabel>
+                  <FormControl>
+                    <Input {...field} />
+                  </FormControl>
+                  <FormDescription>This is Add Manager name.</FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>manager Email</FormLabel>
+                  <FormControl>
+                    <Input type="email" {...field} />
+                  </FormControl>
+                  <FormDescription>This is Add Manager Email.</FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="password"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>manager Password</FormLabel>
+                  <FormControl>
+                    <Input {...field} />
+                  </FormControl>
+                  <FormDescription>
+                    This is Add Pass For Manager.
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <DialogFooter>
+              <DialogClose asChild>
+                <Button variant="outline">Cancel</Button>
+              </DialogClose>
+              <Button type="submit" className="cursor-pointer">
+                {isLoading ? <LoaderIcon /> : "Update"}
+              </Button>
+            </DialogFooter>
           </form>
         </Form>
-
       </DialogContent>
     </Dialog>
   );
-}
+};
+export default ModelAddManager;

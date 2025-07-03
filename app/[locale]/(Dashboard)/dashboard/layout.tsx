@@ -2,7 +2,7 @@
 import { AppSidebar } from "@/components/SideBar";
 // import { Metadata } from "next";
 import { ReactNode } from "react";
-
+import { Toaster } from "sonner";
 // export const metadata: Metadata = {
 //   title: "Product Page",
 //   description: "All Product Mobile Clothes",
@@ -21,7 +21,10 @@ const Layout = ({ children }: IProps) => {
       <SidebarProvider>
         <AppSidebar />
         <SidebarTrigger />
-        <main className="w-full">{children}</main>
+        <main className="w-full">
+          {children}
+           <Toaster richColors />
+        </main>
       </SidebarProvider>
     </ReduxProvider>
   );
