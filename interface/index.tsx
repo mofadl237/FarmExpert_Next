@@ -25,3 +25,9 @@ export interface IManagerAdd{
   password:string;
   farmId:number;
 }
+
+export interface IErrorResponse {
+  data: {
+    message: string;
+  };
+}

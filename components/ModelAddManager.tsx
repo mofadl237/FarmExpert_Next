@@ -30,6 +30,7 @@ import { z } from "zod";
 import { Edit, LoaderIcon } from "lucide-react";
 import { useState } from "react";
 import { useAddManagerMutation } from "@/store/services/Manager";
+import { IErrorResponse } from "@/interface";
 
 const ModelAddManager = () => {
   const [open, setOpen] = useState(false);
@@ -63,11 +64,11 @@ const ModelAddManager = () => {
       await addManager(updatedValues).unwrap();
       toast.success("Manager added successfully.");
       setOpen(false);
-    } catch (error: any) {
-      
-      const errorMessage =
-        error?.data?.message || "Something went wrong while adding the manager.";
-      toast.error(errorMessage);
+    } catch (error: unknown) {
+      const message =
+        (error as IErrorResponse)?.data?.message ||
+        "Something went wrong while adding the manager.";
+      toast.error(message);
     }
 
     //  addManager(updatedValues);
