@@ -14,63 +14,54 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { formContact } from "@/validation";
-import { useAddRequestsMutation } from "@/store/services/Request";
-
-export function ContactForm() {
-  //1- State
-  const [addRequest] = useAddRequestsMutation();
-  
+import { formLogin } from "@/validation";
+import { useLoginMutation } from "@/store/services/Login";
+import {  SetLocal } from "@/lib/utils";
+import { useRouter } from "next/navigation";
+export function LoginForm() {
+    //1- State
+    const router = useRouter();
+  const [login] =useLoginMutation();
   //2-Handler
 
-  const form = useForm<z.infer<typeof formContact>>({
-    resolver: zodResolver(formContact),
+  const form = useForm<z.infer<typeof formLogin>>({
+    resolver: zodResolver(formLogin),
     defaultValues: {
       email: "",
-      farmName: "",
-      phoneNumber: "",
+      password:"",
     },
   });
 
   // 2. Define a submit handler.
-  async function onSubmit(values: z.infer<typeof formContact>) {
-    console.log(values)
+  async function onSubmit(values: z.infer<typeof formLogin>) {
+        
+
+  
     try {
-      await addRequest(values).unwrap();
-      toast.success("Contact Post successfully.");
+       const res = await login(values).unwrap();
+       SetLocal(res.token);
+      toast.success("Login Post successfully , Redirect Dashboard.");
+      form.reset();
+        router.push("/en/dashboard");
     } catch (error: unknown) {
+        console.log(error)
       const errorMessage =
         (error as { data?: { message?: string } })?.data?.message ||
-        "Error adding the farm.";
+        "Error Login Dashboard.";
 
       toast.error(errorMessage);
     }
   }
 
   return (
-    <Form {...form}>
+    <Form {...form} >
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-2"
+        className="space-y-8 w-full mx-auto"
         style={{ direction: "ltr" }}
       >
 
-        <FormField
-          control={form.control}
-          name="farmName"
-          render={({ field }) => (
-            <FormItem className=" !text-black">
-              <FormLabel>Farm Name</FormLabel>
-              <FormControl>
-                <Input
-                  className="!bg-white !text-black relative z-40 w-[70%] !py-4 !ps-4"
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        
         <FormField
           control={form.control}
           name="email"
@@ -79,7 +70,7 @@ export function ContactForm() {
               <FormLabel>Email</FormLabel>
               <FormControl>
                 <Input
-                  className="!bg-white !text-black relative z-40 w-[70%] !py-4 !ps-4"
+                  className="!bg-white"
                   {...field}
                 />
               </FormControl>
@@ -87,15 +78,18 @@ export function ContactForm() {
             </FormItem>
           )}
         />
-        <FormField
+        
+
+<FormField
           control={form.control}
-          name="phoneNumber"
+          name="password"
           render={({ field }) => (
-            <FormItem className=" !text-black">
-              <FormLabel>Phone Number</FormLabel>
+            <FormItem className="!text-black">
+              <FormLabel>Password</FormLabel>
               <FormControl>
                 <Input
-                  className="!bg-white !text-black relative z-40 w-[70%] !py-4 !ps-4"
+                type="password"
+                  className="!bg-white"
                   {...field}
                 />
               </FormControl>
@@ -103,7 +97,8 @@ export function ContactForm() {
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+
+        <Button type="submit" className="w-full mb-8" >Login</Button>
       </form>
     </Form>
   );

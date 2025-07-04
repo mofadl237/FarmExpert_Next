@@ -30,8 +30,9 @@ import { LoaderIcon, Plus } from "lucide-react";
 import { useState } from "react";
 import { useAddFarmMutation } from "@/store/services/Farm";
 
-export default function ModelAddFarm() {
-    
+export default  function ModelAddFarm() {
+  
+
     const [open,setOpen]=useState(false);
     //Use RTK Add
   const [addFarm, { isLoading }] = useAddFarmMutation();

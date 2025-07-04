@@ -2,7 +2,8 @@ import FarmRender from "@/components/FarmRender";
 import ModelAddFarm from "@/components/ModelAddFarm";
 import ModelAddManager from "@/components/ModelAddManager";
 
-const page = () => {
+const page =  () => {
+  
   return (
     <div className="space-y-6 mt-8 w-full">
      <div className="flex gap-4 ">

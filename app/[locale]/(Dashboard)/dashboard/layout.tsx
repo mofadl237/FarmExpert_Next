@@ -7,13 +7,17 @@ import { ReactNode } from "react";
 //   description: "All Product Mobile Clothes",
 // };
 
+
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+
 
 interface IProps {
   children: ReactNode;
 }
 
-const Layout = ({ children }: IProps) => {
+const Layout = async ({ children }: IProps) => {
+  
+  
   return (
     
       <SidebarProvider>

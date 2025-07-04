@@ -36,3 +36,15 @@ export const formContact = z.object({
   }),
 
 })
+export const formLogin = z.object({
+ 
+   email: z
+    .string()
+    .regex(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, {
+      message: "Email must be a valid format like example@email.com",
+    }),
+    password: z.string().min(2, {
+    message: "Password must be Required",
+  }),
+
+})

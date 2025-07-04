@@ -1,8 +1,8 @@
 
+
 const page = () => {
   return (
-    <>Why Do You Show When
-    </>
+    <div>page Products</div>
   )
 }
 

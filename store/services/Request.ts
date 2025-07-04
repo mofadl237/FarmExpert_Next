@@ -6,7 +6,7 @@ export const RequestApiSlice =createApi({
     reducerPath:'request',
     tagTypes:['Request'],
     baseQuery:fetchBaseQuery({
-        baseUrl:'http://farmxpertapi.runasp.net/api'
+        baseUrl:'https://farmxpertapi.runasp.net/api'
     }),
     endpoints:(build)=>({
         getRequests:build.query<IRequest[],void>({

@@ -39,7 +39,7 @@ export default function Home() {
       <AnimatedSection className="h-screen ">
         <AnimatedHeader title={t("about.title")} center />
 
-        <div className="flex flex-col-reverse sm:flex-row justify-between gap-3">
+        <div className="flex flex-col-reverse sm:flex-row justify-between gap-8  md:gap-3">
           <div className="description sm:w-1/2 space-y-3">
             <div className="top">
               <h2 className="text-xl font-semibold">{t("about.subTitle1")}</h2>

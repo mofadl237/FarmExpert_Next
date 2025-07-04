@@ -6,7 +6,7 @@ export const ManagerApiSlice =createApi({
    reducerPath:'manager',
    tagTypes:['Manager'],
     baseQuery:fetchBaseQuery({
-        baseUrl:'http://farmxpertapi.runasp.net/api'
+        baseUrl:'https://farmxpertapi.runasp.net/api'
     }),
     endpoints:(build)=>({
         getManagers:build.query<IManager[],void>({
