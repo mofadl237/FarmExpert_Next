@@ -3,14 +3,14 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const FarmApiSlice = createApi({
   reducerPath: "farm",
-  tagTypes: ["Farms"],
+  tagTypes: ["Farms" ,'Manager'],
   baseQuery: fetchBaseQuery({ baseUrl: "http://farmxpertapi.runasp.net/api" }),
   endpoints: (build) => ({
     getFarms: build.query<IFarm[], void>({
       query: () => ({
         url: "/Farms/All",
       }),
-      providesTags: ["Farms"],
+      providesTags: ["Farms" ,'Manager'],
     }),
 
     addFarm: build.mutation<void, { name: string }>({
@@ -19,7 +19,7 @@ export const FarmApiSlice = createApi({
         method: "POST",
         body,
       }),
-      invalidatesTags: ["Farms"],
+      invalidatesTags: ["Farms" ,'Manager'],
     }),
 
     deleteFarm: build.mutation<void, number>({
@@ -27,7 +27,7 @@ export const FarmApiSlice = createApi({
         url: `/Farms/delete/${id}`,
         method: "DELETE",
       }),
-      invalidatesTags: ["Farms"],
+      invalidatesTags: ["Farms" ,'Manager']
     }),
 
     updateFarm: build.mutation<void, { id: number; name: string }>({
@@ -38,7 +38,7 @@ export const FarmApiSlice = createApi({
           name,
         },
       }),
-      invalidatesTags: ["Farms"],
+      invalidatesTags: ["Farms" ,'Manager']
     }),
   }),
 });

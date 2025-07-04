@@ -31,3 +31,20 @@ export interface IErrorResponse {
     message: string;
   };
 }
+export interface IRequest{
+    id : number ;
+    email:string;
+    farmName :string;
+    phoneNumber:string;
+    completed ?:boolean;
+    createdAt?:Date ;
+    
+}
+export interface IRequestContact{
+
+    email:string;
+    farmName :string;
+    phoneNumber:string;
+    
+    
+}

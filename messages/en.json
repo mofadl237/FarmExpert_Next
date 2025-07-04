@@ -2,7 +2,50 @@
   "main": {
     "description": "smart cows farm"
   },
-  "about":{
-    "title":"Advanced Cattle Farm Management"
+  "about": {
+    "title": "Advanced Cattle Farm Management",
+    "subTitle1": "Smart Cattle Farming & Genetic Improvement",
+    "subTitle2": "Farm Marketplace for Dairy, Meat & Poultry",
+
+    "description1": "We implement modern farming systems to enhance cattle breeding,\nmonitor herd health, and treat skin diseases. Using advanced\ngenetics and hybridization techniques, we improve livestock\nquality, ensuring healthier and more productive cows.",
+    "description2": "We offer a digital marketplace for high-quality cattle products,\nincluding dairy, meat, and poultry. Our platform connects\nfarmers directly with consumers, ensuring fresh and reliable\nproducts with seamless delivery options."
+  },
+  "features": {
+    "title1": "Farm Market",
+    "title2": "Cow Monitoring",
+    "title3": "Vet Clinic",
+    "title4": "Farm Reports",
+    "description1": "A digital marketplace for fresh dairy, meat, and poultry. It connects farmers with consumers, ensuring high-quality products and fast delivery.",
+    "description2": "A smart system that tracks cow health and feeding schedules. It sends real-time notifications to improve nutrition and farm management.",
+    "description3": "An online platform for treating livestock diseases. It provides expert consultations and medical recommendations for farmers.",
+    "description4": "A reporting tool that tracks farm performance and finances. It provides monthly and yearly reports to help farmers analyze data and optimize productivity."
+  },
+  "products": {
+    "title": "OUr products",
+    "product1": {
+      "title": "Vet clinic",
+      "description1": "Skin diseases diagnosis",
+      "description2": "Medical care solutions",
+      "description3": "Drug interaction check",
+      "description4": "Hybridization support"
+    },
+    "product2": {
+      "title": "Farm Expert",
+     "description1": "Monitoring Cattle Checkups",
+    "description2": "Contacting Doctor Appointments",
+    "description3": "Alerts Food, Water, Medicine",
+    "description4": "Report Annual Cattle Production"
+    },
+    "product3": {
+      "title": "Farm market",
+      "description1": "Marketing Farm Products",
+    "description2": "Sales & Online Payment",
+    "description3": "Prices Great Deals & Offers",
+    "description4": "Delivery Farm Products To Consumers"
+    }
+  },
+  "contact":{
+    "title":"start Contact us"
   }
+
 }

@@ -21,3 +21,18 @@ import { z } from "zod"
   }),
   farmId: z.string(),
 })
+ //Valid Contact Us 
+export const formContact = z.object({
+  farmName: z.string().min(2, {
+    message: "Farm Name must be at least 2 characters.",
+  }),
+   email: z
+    .string()
+    .regex(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, {
+      message: "Email must be a valid format like example@email.com",
+    }),
+    phoneNumber: z.string().min(2, {
+    message: "Phone Number must be Required",
+  }),
+
+})

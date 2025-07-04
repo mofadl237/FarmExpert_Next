@@ -22,10 +22,13 @@ export const AnimatedHeader: React.FC<SectionHeaderProps> = ({
       viewport={{ once: true }}
       className={`my-8  ${center ? "text-center" : "text-start"} `}
     >
-      <h2 className="py-8 text-sm sm:text-md md:text-4xl uppercase font-bold inline-block bg-gradient-to-r from-[#7ed56f] to-[#28b485] bg-clip-text text-transparent tracking-[0.2rem] transition-all duration-200  hover:scale-110 
-    hover:skew-y-[2deg] 
-    hover:skew-x-[15deg] 
-    hover:[text-shadow:0.5rem_1rem_2rem_rgba(0,0,0,0.2)]">
+      <h2
+        className={`py-8  ${
+          /[\u0600-\u06FF]/.test(title)
+            ? "text-[18px] md:text-5xl"
+            : "text-[10px] md:text-4xl"
+        }   md:text-4xl uppercase font-bold inline-block bg-gradient-to-r from-[#7ed56f] to-[#28b485] bg-clip-text text-transparent tracking-[0.2rem] transition-all duration-200  hover:scale-110 hover:skew-y-[2deg] hover:skew-x-[15deg] hover:[text-shadow:0.5rem_1rem_2rem_rgba(0,0,0,0.2)]`}
+      >
         {title}
       </h2>
       {subtitle && (

@@ -5,6 +5,8 @@ import { ThemeProvider } from "@/Providers/ThemeProvider";
 import {NextIntlClientProvider, hasLocale} from 'next-intl';
 import {notFound} from 'next/navigation';
 import {routing} from '@/i18n/routing';
+import ReduxProvider from "@/Providers/ReduxProvider";
+import { Toaster } from "sonner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -72,6 +74,9 @@ export default async function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <ReduxProvider>
+
+        
         <NextIntlClientProvider>
         <ThemeProvider
           attribute={"class"}
@@ -83,9 +88,11 @@ export default async function RootLayout({
           <main className="container mx-auto px-5">
            
           {children}
+          <Toaster richColors />
           </main>
         </ThemeProvider>
           </NextIntlClientProvider>
+          </ReduxProvider>
       </body>
     </html>
   );

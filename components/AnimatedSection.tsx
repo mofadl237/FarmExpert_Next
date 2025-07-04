@@ -12,12 +12,12 @@ interface AnimatedSectionProps {
 
 export const AnimatedSection: React.FC<AnimatedSectionProps> = ({
   children,
-  className = "",
+  className = "py-8",
 }) => {
   const controls = useAnimation();
   const [ref, inView] = useInView({
     triggerOnce: false,
-    threshold: 0.4, 
+    threshold: 0.2, 
   });
 
   useEffect(() => {

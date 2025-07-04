@@ -21,7 +21,7 @@ export default function FarmCard({ farm }: IProps) {
     deleteFarm(id);
   };
   return (
-    <Card className="w-full max-w-md mx-auto shadow-md">
+    <Card className="w-full max-w-md rounded-md px-5 mx-auto shadow-md">
       <CardHeader>
         <CardTitle className="flex items-center gap-2 text-green-700">
           <Home className="w-5 h-5" />

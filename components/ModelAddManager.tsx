@@ -62,8 +62,10 @@ const ModelAddManager = () => {
 
     try {
       await addManager(updatedValues).unwrap();
+      
       toast.success("Manager added successfully.");
       setOpen(false);
+
     } catch (error: unknown) {
       const message =
         (error as IErrorResponse)?.data?.message ||

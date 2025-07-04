@@ -19,12 +19,12 @@ const ErrorHandler = ({ statusCode = 500, title = "Server Error" }: IProps) => {
         </h2>
         <p>Oops Something went wrong. Try to refresh this page or go to home</p>
         <div className="flex items-center justify-center space-x-4 my-10">
-          <Link href={"/"}  className="bg-indigo-900 rounded-md p-3 text-white">
+          <Link href={"/"}  onClick={() => window.location.reload()} className="bg-indigo-900 rounded-md p-3 text-white">
             Home
           </Link>
           <Link
             href={pathname}
-            
+            onClick={() => window.location.reload()}
             className="bg-indigo-900 rounded-md p-3 text-white"
           >
             Refresh
