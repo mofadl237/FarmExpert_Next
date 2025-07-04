@@ -51,7 +51,7 @@ export function ContactForm() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-2"
+        className="space-y-4"
         style={{ direction: "ltr" }}
       >
 
@@ -95,7 +95,7 @@ export function ContactForm() {
               <FormLabel>Phone Number</FormLabel>
               <FormControl>
                 <Input
-                  className="!bg-white !text-black relative z-40 w-[70%] !py-4 !ps-4"
+                  className="!bg-white !text-black relative z-40 w-[70%]  !py-4 !ps-4"
                   {...field}
                 />
               </FormControl>
@@ -103,7 +103,7 @@ export function ContactForm() {
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <Button type="submit" className="w-[70%]">Submit</Button>
       </form>
     </Form>
   );

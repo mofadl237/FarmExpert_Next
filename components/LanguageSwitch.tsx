@@ -12,7 +12,7 @@ export function LanguageSwitcher() {
 
   return (
     <Link href={newPath} className="hover:underline text-sm">
-      {isArabic ? <Badge variant="destructive" className='align-middle h-full'>En</Badge> : <Badge variant="default" className='align-middle h-full'>Ar</Badge>}
+      {isArabic ? <Badge  variant="secondary" className='align-middle border-1 border-white px-[10px] py-[9px]'>En</Badge> : <Badge variant="secondary" className='align-middle h-full border-1 border-white py-[9px]  px-[10px]'>Ar</Badge>}
     </Link>
   );
 }
