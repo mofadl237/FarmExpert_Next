@@ -4,7 +4,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const FarmApiSlice = createApi({
   reducerPath: "farm",
   tagTypes: ["Farms" ,'Manager'],
-  baseQuery: fetchBaseQuery({ baseUrl: "http://farmxpertapi.runasp.net/api" }),
+  baseQuery: fetchBaseQuery({ baseUrl: "https://farmxpertapi.runasp.net/api" }),
   endpoints: (build) => ({
     getFarms: build.query<IFarm[], void>({
       query: () => ({
