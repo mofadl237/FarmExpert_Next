@@ -27,9 +27,10 @@ export interface IManagerAdd{
 }
 
 export interface IErrorResponse {
-  data: {
+  data ?: {
     message: string;
   };
+  message?:string;
 }
 export interface IRequest{
     id : number ;
@@ -55,4 +56,19 @@ export interface IJwtPayload {
   exp: number;
   iss: string;
   aud: string;
+}
+
+export interface IWorker{
+  id?:number;
+  name: string;
+  nationalID: string;
+  age: string;
+  experience: string;
+  specialty: string;
+  phone: string;
+  salary: string;
+  code: string;
+  createdAt?: string;
+  email: string;
+  imagePath: File;
 }

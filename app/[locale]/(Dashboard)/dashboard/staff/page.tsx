@@ -1,7 +1,13 @@
+import ModelAddWork from "@/components/ModelAddWork"
+import RenderWork from "@/components/RenderWork"
 
 const page = () => {
   return (
-    <div>page Staff</div>
+     <div className="space-y-6 mt-8 w-full">
+      
+      <ModelAddWork />
+      <RenderWork />
+    </div>
   )
 }
 

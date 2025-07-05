@@ -3,6 +3,7 @@ import { FarmApiSlice } from "./services/Farm";
 import { ManagerApiSlice } from "./services/Manager";
 import { RequestApiSlice } from "./services/Request";
 import { LoginApiSlice } from "./services/Login";
+import { ManagerFarmApiSlice } from "./services/ManagerFarm";
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     [ManagerApiSlice.reducerPath]: ManagerApiSlice.reducer,
     [RequestApiSlice.reducerPath]:RequestApiSlice.reducer,
     [LoginApiSlice.reducerPath]:LoginApiSlice.reducer,
+    [ManagerFarmApiSlice.reducerPath]:ManagerFarmApiSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
@@ -17,6 +19,7 @@ export const store = configureStore({
       .concat(ManagerApiSlice.middleware)
       .concat(RequestApiSlice.middleware)
       .concat(LoginApiSlice.middleware)
+      .concat(ManagerFarmApiSlice.middleware)
 });
 
 export type RootState = ReturnType<typeof store.getState>;

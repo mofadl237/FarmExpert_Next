@@ -48,3 +48,26 @@ export const formLogin = z.object({
   }),
 
 })
+
+export const workerSchema = z.object({
+  name: z.string().min(1, { message: "Name is required" }),
+  email: z
+    .string()
+    .email({ message: "Email must be a valid format like example@email.com" }),
+    phone: z
+    .string()
+    .regex(/^01[0-2,5]{1}[0-9]{8}$/, {
+      message: "Phone must be a valid Egyptian number",
+    }),
+       password: z.string().min(1, { message: "Code is required" }),
+  specialty: z.string().min(1, { message: "Specialty is required" }),
+
+  nationalID: z.string().length(14, { message: "National ID must be 14 digits" }),
+  // age: z.string().min(1, { message: "Age is required" }),
+  // experience: z.string().min(1, { message: "Experience is required" }),
+  
+  // salary: z.string({ message: "Salary must be a positive number" }),
+  
+   imageUrl: z.instanceof(File, { message: "Image is required" }),
+
+});

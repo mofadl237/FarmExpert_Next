@@ -34,10 +34,10 @@ export function ContactForm() {
 
   // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof formContact>) {
-    console.log(values)
+     form.reset();
     try {
       await addRequest(values).unwrap();
-      toast.success("Contact Post successfully.");
+      toast.success("Contact Record successfully.");
     } catch (error: unknown) {
       const errorMessage =
         (error as { data?: { message?: string } })?.data?.message ||
@@ -45,6 +45,7 @@ export function ContactForm() {
 
       toast.error(errorMessage);
     }
+   
   }
 
   return (
@@ -63,7 +64,7 @@ export function ContactForm() {
               <FormLabel>Farm Name</FormLabel>
               <FormControl>
                 <Input
-                  className="!bg-white !text-black relative z-40 w-[70%] !py-4 !ps-4"
+                  className="!bg-white !text-black relative z-40 w-[80%] !py-4 !ps-4"
                   {...field}
                 />
               </FormControl>
@@ -79,7 +80,7 @@ export function ContactForm() {
               <FormLabel>Email</FormLabel>
               <FormControl>
                 <Input
-                  className="!bg-white !text-black relative z-40 w-[70%] !py-4 !ps-4"
+                  className="!bg-white !text-black relative z-40 w-[80%] !py-4 !ps-4"
                   {...field}
                 />
               </FormControl>
@@ -95,7 +96,7 @@ export function ContactForm() {
               <FormLabel>Phone Number</FormLabel>
               <FormControl>
                 <Input
-                  className="!bg-white !text-black relative z-40 w-[70%]  !py-4 !ps-4"
+                  className="!bg-white !text-black relative z-40 w-[80%]  !py-4 !ps-4"
                   {...field}
                 />
               </FormControl>
@@ -103,7 +104,7 @@ export function ContactForm() {
             </FormItem>
           )}
         />
-        <Button type="submit" className="w-[70%]">Submit</Button>
+        <Button type="submit" className="w-[80%]">Submit</Button>
       </form>
     </Form>
   );
