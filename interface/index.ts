@@ -27,10 +27,9 @@ export interface IManagerAdd{
 }
 
 export interface IErrorResponse {
-  data ?: {
+  data : {
     message: string;
   };
-  message?:string;
 }
 export interface IRequest{
     id : number ;
@@ -91,6 +90,15 @@ export interface ICattle{
   weight:number;
   gender:string;
   type:string;
+}
+export interface IMilk{
+  id?:number;
+  tagNumber:string;
+  am?:number;
+  pm?:number;
+  total?:number;
+  notes:string;
+  date?:Date;
 }
 // export interface ICattleAdd{
 //   cattleID?:number;

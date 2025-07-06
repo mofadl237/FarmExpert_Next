@@ -1,4 +1,4 @@
-import { ICattle, IWorker } from "@/interface";
+import { ICattle, IMilk, IWorker } from "@/interface";
 import { getToken } from "@/lib/utils";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
@@ -32,6 +32,12 @@ export const ManagerFarmApiSlice = createApi({
       }),
       providesTags: ["ManagerFarm"],
     }),
+    getMilk: build.query<IMilk[], void>({
+      query: () => ({
+        url: `/MilkProduction/All`,
+      }),
+      providesTags: ["ManagerFarm"],
+    }),
 
     //2- Add
 
@@ -48,6 +54,14 @@ export const ManagerFarmApiSlice = createApi({
         url: "/Cattle/AddCattle",
         method: "Post",
         body: formData,
+      }),
+      invalidatesTags: ["ManagerFarm"],
+    }),
+    addMilk: build.mutation<void, IMilk>({
+      query: (body) => ({
+        url: "/MilkProduction/Add",
+        method: "Post",
+        body,
       }),
       invalidatesTags: ["ManagerFarm"],
     }),
@@ -70,6 +84,14 @@ export const ManagerFarmApiSlice = createApi({
       }),
       invalidatesTags: ["ManagerFarm"],
     }),
+    updateMilk: build.mutation<void, { id: number; body: IMilk }>({
+      query: ({ id, body }) => ({
+        url: `/MilkProduction/Edit/${id}`,
+        method: "PUT",
+        body,
+      }),
+      invalidatesTags: ["ManagerFarm"],
+    }),
 
     //4- Delete
 
@@ -87,6 +109,13 @@ export const ManagerFarmApiSlice = createApi({
       }),
       invalidatesTags: ["ManagerFarm"],
     }),
+    deleteMilk: build.mutation<void, { id: number }>({
+      query: ({ id }) => ({
+        url: `/MilkProduction/Delete/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["ManagerFarm"],
+    }),
   }),
 });
 
@@ -100,4 +129,8 @@ export const {
   useAddCattleMutation,
   useUpdateCattleMutation,
   useDeleteCattleMutation,
+  useGetMilkQuery,
+  useAddMilkMutation,
+  useUpdateMilkMutation,
+  useDeleteMilkMutation,
 } = ManagerFarmApiSlice;

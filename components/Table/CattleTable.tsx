@@ -22,7 +22,6 @@ export function CattleTable() {
   return (
     <>
       <div>
-        {" "}
         <Select
           value={selectType}
           onValueChange={(value) => setSelectType(value)}
@@ -46,6 +45,7 @@ export function CattleTable() {
             <TableHead>Cattle Gender</TableHead>
             <TableHead>Cattle weight</TableHead>
             <TableHead>Cattle Age</TableHead>
+            <TableHead className="text-center">Action</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>

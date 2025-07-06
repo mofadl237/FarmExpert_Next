@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import {
   Table,
   TableBody,
@@ -8,51 +8,66 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table"
-import { Badge } from "@/components/ui/badge"
-import { useGetRequestsQuery } from "@/store/services/Request";
+} from "@/components/ui/table";
+import { Badge } from "@/components/ui/badge";
 import MilkTableAction from "./MilkTableAction";
-
-
+import { useGetMilkQuery } from "@/store/services/ManagerFarm";
 
 export function MilkTable() {
-    //1- state get Requests From Api 
-    const {data:requests}=useGetRequestsQuery()
+
+  //1- state get Requests From Api
+  const { data: milks } = useGetMilkQuery();
+  
   return (
     <Table>
       <TableCaption>Requests </TableCaption>
       <TableHeader>
         <TableRow>
-          <TableHead >ID</TableHead>
-          <TableHead>Farm Name</TableHead>
-          <TableHead>Email</TableHead>
-          <TableHead>phoneNumber</TableHead>
-          <TableHead>Completed</TableHead>
-          <TableHead>CreatedAt</TableHead>
-          <TableHead className="text-right">Action</TableHead>
+          <TableHead>ID Cow</TableHead>
+          <TableHead>Am</TableHead>
+          <TableHead>Pm</TableHead>
+          <TableHead>Total</TableHead>
+          <TableHead>Notes</TableHead>
+          <TableHead>Date</TableHead>
+          <TableHead className="text-center">Action</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
-        {requests?.length && requests.map((request) => (
-          <TableRow key={request.id}>
-            <TableCell className="font-medium">{request.id}</TableCell>
-            <TableCell>{request.farmName}</TableCell>
-            <TableCell>{request.email}</TableCell>
-            <TableCell>{request.phoneNumber}</TableCell>
-            <TableCell>{request.completed ? <Badge variant="default">Added</Badge> : <Badge variant="destructive">Not Add</Badge>}</TableCell>
-            <TableCell>{request.createdAt?.toLocaleString()}</TableCell>
-            <TableCell className="flex space-x-2 item-center justify-end ">
-                <MilkTableAction request={request}/>
-            </TableCell>
-          </TableRow>
-        ))}
+        {milks?.length &&
+          milks.map((milk) => (
+            
+            <TableRow key={milk.id}>
+              <TableCell className="font-medium">{milk.tagNumber}</TableCell>
+              <TableCell><Badge className="px-5" variant={'secondary'}>{milk.am}</Badge></TableCell>
+              <TableCell><Badge className="px-5">{milk.pm}</Badge></TableCell>
+              <TableCell>{milk.total}</TableCell>
+              <TableCell>{milk.notes}</TableCell>
+              <TableCell>
+                {milk.date
+                  ? (() => {
+                      const date = new Date(milk.date);
+                      const day = date.getDate();
+                      const month = date.getMonth() + 1;
+                      const year = date.getFullYear();
+                      return `${day}-${month}-${year}`;
+                    })()
+                  : "—"}
+              </TableCell>
+
+              <TableCell className="flex space-x-2 item-center justify-end ">
+                <MilkTableAction milk={milk} />
+              </TableCell>
+            </TableRow>
+          ))}
       </TableBody>
       <TableFooter>
         <TableRow>
-          <TableCell colSpan={6}>Total</TableCell>
-          <TableCell className="text-right">{requests?.length ? requests.length : 'you Do nt Any Todo Yet !!'}</TableCell>
+          <TableCell colSpan={6}>Total Cows Milked</TableCell>
+          <TableCell className="text-right">
+            {milks?.length ?   milks.length : "you Do'nt Any Milk Yet !!"}
+          </TableCell>
         </TableRow>
       </TableFooter>
     </Table>
-  )
+  );
 }

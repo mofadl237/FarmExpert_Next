@@ -74,3 +74,19 @@ export const CattleSchema = z.object({
     invalid_type_error: "Age must be a number",
   }),
 });
+
+
+export const MilkSchema = z.object({
+  tagNumber: z.string({
+   message: "Please Enter Cow Id.",
+  }),
+  am: z.number({
+  invalid_type_error: "Am must be a number",
+}).optional(),
+  pm: z.number({
+  invalid_type_error: "Pm must be a number",
+}).optional(),
+
+  notes:z.string({message:"Notes Is Required"}),
+ 
+});

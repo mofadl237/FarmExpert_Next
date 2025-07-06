@@ -26,34 +26,35 @@ import { Input } from "@/components/ui/input";
 
 import { MilkSchema } from "@/validation";
 import { z } from "zod";
-import { Plus } from "lucide-react";
+import { Edit, LoaderIcon } from "lucide-react";
 import { useState } from "react";
-import { IErrorResponse } from "@/interface";
-import { useAddMilkMutation } from "@/store/services/ManagerFarm";
+import { IErrorResponse, IMilk } from "@/interface";
+import { useUpdateMilkMutation } from "@/store/services/ManagerFarm";
 
-const AddMilk = () => {
-  //1- state
+interface IProps {
+  milk: IMilk;
+}
+
+const EditMilk = ({ milk }: IProps) => {
   const [open, setOpen] = useState(false);
-  const [addMilk] =useAddMilkMutation();
+  const [updateMilk,{isLoading}]=useUpdateMilkMutation()
   //2- Handler
   const form = useForm<z.infer<typeof MilkSchema>>({
     resolver: zodResolver(MilkSchema),
     defaultValues: {
-      tagNumber: "",
-      am: 0,
-      pm: 0,
-      notes: "",
+      tagNumber: milk.tagNumber ?? "",
+      am: milk.am ?? 0,
+      pm: milk.pm ?? 0,
+      notes: milk.notes ?? "",
     },
   });
 
   // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof MilkSchema>) {
-    console.log("Add Milk ====> ", values);
     try {
-      await addMilk(values).unwrap()
-      toast.success("Milk added successfully.");
+        await updateMilk({id:milk.id!, body :values})
+      toast.success("Milk Updated successfully.");
     } catch (error: unknown) {
-      console.log("Error Add Milk ===> ",error)
       const message =
         (error as IErrorResponse)?.data?.message ||
         "Something went wrong while adding the milk.";
@@ -69,14 +70,15 @@ const AddMilk = () => {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button variant="outline" className="flex-auto">
-          <Plus /> Add Milk
+          <Edit /> Edit Milk
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]  md:max-w-[600px] max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle>Add Milk</DialogTitle>
+          <DialogTitle>Edit Milk</DialogTitle>
           <DialogDescription>
-            Do You Want Add New Milk Product . Click save when you&apos;re done.
+            Do You Want Edit New Milk Product . Click save when you&apos;re
+            done.
           </DialogDescription>
         </DialogHeader>
 
@@ -105,9 +107,8 @@ const AddMilk = () => {
                   <FormLabel>Am : </FormLabel>
                   <FormControl>
                     <Input
-                    min={0}
                       type="number"
-                      value={field.value }
+                      value={field.value ?? 0}
                       onChange={(e) => field.onChange(Number(e.target.value))}
                     />
                   </FormControl>
@@ -124,9 +125,8 @@ const AddMilk = () => {
                   <FormLabel>Pm : </FormLabel>
                   <FormControl>
                     <Input
-                    min={0}
                       type="number"
-                      value={field.value }
+                      value={field.value ?? 0}
                       onChange={(e) => field.onChange(Number(e.target.value))}
                     />
                   </FormControl>
@@ -155,8 +155,8 @@ const AddMilk = () => {
                 <Button variant="outline">Cancel</Button>
               </DialogClose>
               <Button type="submit" className="cursor-pointer">
-                {/* {isLoading ? <LoaderIcon /> : "Add Milk"} */}
-                Add Milk
+                {isLoading ? <LoaderIcon /> : "Update Milk"}
+                
               </Button>
             </DialogFooter>
           </form>
@@ -165,4 +165,4 @@ const AddMilk = () => {
     </Dialog>
   );
 };
-export default AddMilk;
+export default EditMilk;

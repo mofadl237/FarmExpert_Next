@@ -1,43 +1,31 @@
 "use client";
 
-import { toast } from "sonner";
-import { IRequest } from "@/interface";
-import { useAddFarmMutation } from "@/store/services/Farm";
-import { useDeleteRequestsMutation } from "@/store/services/Request";
-import { Button } from "../ui/button";
+import { IMilk } from "@/interface";
+
+import EditMilk from "../Model/EditMilk";
+import AlertDelete from "../AlertDelete";
+import { useDeleteMilkMutation } from "@/store/services/ManagerFarm";
 interface IProps{
-  request:IRequest;
+  milk:IMilk;
 }
 
-const MilkTableAction = ( {request} :  IProps) => {
+const MilkTableAction = ( {milk} :  IProps) => {
   //1- state
-    // const [loading, setIsLoading] =useState(false);
-    const [addFarm]=useAddFarmMutation()
-    const[deleteRequest]=useDeleteRequestsMutation()
+   const [deleteMilk , {isLoading}] = useDeleteMilkMutation()
+    
     //2- Handler
-   const onClickAddFarm = async () => {
-  try {
-    await addFarm({ name: request.farmName }).unwrap();
-    deleteRequest(request.id)
-    toast.success("Farm added successfully.");
-  } catch (error: unknown) {
-    const errorMessage =
-      (error as { data?: { message?: string } })?.data?.message ||
-      "Error adding the farm.";
-    toast.error(errorMessage);
-  }
+   const onDelete = async (id :number) => {
+    await deleteMilk({id})
 };
   return (
     <>
+      <EditMilk milk={milk}/>
+
+      <AlertDelete
+              loadingDelete={isLoading}
+              Delete={() =>  onDelete(milk.id!)}
       
-      <Button
-        className="cursor-pointer"
-        variant={"secondary"}
-        onClick={onClickAddFarm}
-      >
-       {/* { loading ?  <Loader/> : <Trash />} */}
-       add
-      </Button>
+            />
 
       
     </>
