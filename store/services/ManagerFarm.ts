@@ -80,6 +80,13 @@ export const ManagerFarmApiSlice = createApi({
       }),
       invalidatesTags: ["ManagerFarm"],
     }),
+    deleteCattle: build.mutation<void, { id: number }>({
+      query: ({ id }) => ({
+        url: `Cattle/DeleteCattle/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["ManagerFarm"],
+    }),
   }),
 });
 
@@ -92,4 +99,5 @@ export const {
   useGetCattleQuery,
   useAddCattleMutation,
   useUpdateCattleMutation,
+  useDeleteCattleMutation,
 } = ManagerFarmApiSlice;

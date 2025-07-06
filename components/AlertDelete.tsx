@@ -42,8 +42,8 @@ export default function AlertDelete({ Delete, loadingDelete }: IProps) {
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction  className="bg-transparent hover:bg-transparent">
-            <Button variant="destructive"  onClick={Delete}>
+          <AlertDialogAction asChild>
+            <Button variant="destructive" onClick={Delete}>
               Continue
             </Button>
           </AlertDialogAction>
