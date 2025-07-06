@@ -161,7 +161,7 @@ const ModelAddManager = () => {
                 <Button variant="outline">Cancel</Button>
               </DialogClose>
               <Button type="submit" className="cursor-pointer">
-                {isLoading ? <LoaderIcon /> : "Update"}
+                {isLoading ? <LoaderIcon /> : "Add"}
               </Button>
             </DialogFooter>
           </form>

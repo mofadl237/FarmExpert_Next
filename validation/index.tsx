@@ -63,10 +63,10 @@ export const workerSchema = z.object({
   specialty: z.string().min(1, { message: "Specialty is required" }),
 
   nationalID: z.string().length(14, { message: "National ID must be 14 digits" }),
-  // age: z.string().min(1, { message: "Age is required" }),
-  // experience: z.string().min(1, { message: "Experience is required" }),
+ age: z.string().min(1, { message: "Age is required" }),
+   // experience: z.string().min(1, { message: "Experience is required" }),
   
-  // salary: z.string({ message: "Salary must be a positive number" }),
+  salary: z.string({ message: "Salary must be a positive number" }),
   
    imageUrl: z.instanceof(File, { message: "Image is required" }),
 

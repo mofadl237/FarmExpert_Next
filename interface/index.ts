@@ -58,10 +58,23 @@ export interface IJwtPayload {
   aud: string;
 }
 
-export interface IWorker{
+export interface IWorkerAdd{
   id?:number;
   name: string;
   nationalID: string;
+  password:string;
+  age: string;
+  experience: string;
+  specialty: string;
+  phone: string;
+  salary: string;
+  email: string;
+}
+export interface IWorker{
+  id:number;
+  name: string;
+  nationalID: string;
+  password:string;
   age: string;
   experience: string;
   specialty: string;

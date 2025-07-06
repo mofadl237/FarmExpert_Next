@@ -30,10 +30,27 @@ export const ManagerFarmApiSlice = createApi({
         body:formData,
       }),
       invalidatesTags:['ManagerFarm']
+    }),
+    updateWork: build.mutation<void, { id: number; formData: FormData }>({
+  query: ({ id, formData }) => ({
+    url: `/Worker/UpdateWorker/${id}`,
+    method: "PUT",
+    body: formData,
+  }),
+  invalidatesTags: ['ManagerFarm'],
+}),
 
-    })
+    deleteWork:build.mutation<void ,  {id:number}>({
+      query:(id)=>({
+        url:`/Worker/delete/${id}`,
+        method:"DELETE",
+      }),
+      invalidatesTags:['ManagerFarm']
+    }),
+
+
   }),
 });
 
 export default ManagerFarmApiSlice.reducer;
-export const {useGetWorkerQuery,useAddWorkMutation}=ManagerFarmApiSlice;
+export const {useGetWorkerQuery,useAddWorkMutation,useDeleteWorkMutation,useUpdateWorkMutation}=ManagerFarmApiSlice;

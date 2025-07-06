@@ -26,37 +26,41 @@ import { Input } from "@/components/ui/input";
 
 import {  workerSchema } from "@/validation";
 import { z } from "zod";
-import { Edit, LoaderIcon } from "lucide-react";
+import {  LoaderIcon, Pencil } from "lucide-react";
 import { useState } from "react";
-import { useAddWorkMutation } from "@/store/services/ManagerFarm";
+import {  IWorker } from "@/interface";
+import {  useUpdateWorkMutation } from "@/store/services/ManagerFarm";
 
-const ModelAddWork = () => {
+interface IProps{
+    work:IWorker;
+}
+
+const ModelEditWork = ({work}:IProps) => {
   const [open, setOpen] = useState(false);
-  const [addWork, { isLoading }] = useAddWorkMutation();
+  const [updateWork, { isLoading }] = useUpdateWorkMutation();
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
   //2- Handler
   const form = useForm<z.infer<typeof workerSchema>>({
     resolver: zodResolver(workerSchema),
     defaultValues: {
-      name: "",
-      nationalID: "",
-       age: "" ,
+      name: work.name,
+      nationalID: work.nationalID,
+       age: work.age ,
     //   experience: "",
-      specialty: "",
-      phone: "",
-      password:"",
-      salary: '',
+      specialty: work.specialty,
+      phone: work.phone,
+      password:work.password,
+      salary: work.salary,
     //   code: "",
-      email: "",
-    //   imageUrl: undefined,
+      email: work.email,
+    //   image: work.image,
     },
   });
 
   // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof workerSchema>) {
     
-      console.log("Add work ====> ",values)
     try {
          const formData = new FormData();
 
@@ -76,11 +80,11 @@ if (!selectedFile) {
   toast.error("Please upload an image.");
   return;
 }
-formData.append("image", selectedFile);
+formData.append("imagePath", selectedFile);
 
-
-     await addWork(formData).unwrap(); 
-    toast.success("Worker added successfully.");
+console.log("Form Data Edit ===>",formData)
+     await updateWork({id:work.id,formData}).unwrap(); 
+    toast.success("Worker Updated successfully.");
     } catch (error: unknown) {
   const message =
     error instanceof Error ? error.message : "Something went wrong while adding the worker.";
@@ -96,14 +100,15 @@ formData.append("image", selectedFile);
     <Dialog open={open} onOpenChange={setOpen} >
       <DialogTrigger asChild>
         <Button variant="outline" className="flex-auto">
-          <Edit /> Add Worker
+          <Pencil className="w-4 h-4" />
+          Edit
         </Button>
       </DialogTrigger>
 <DialogContent className="sm:max-w-[425px]  md:max-w-[600px] max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle>Add Worker</DialogTitle>
+          <DialogTitle>Edit Worker</DialogTitle>
           <DialogDescription>
-            Do You Want Add New Worker. Click save when you&apos;re done.
+            Do You Want Edit Worker. Click save when you&apos;re done.
           </DialogDescription>
         </DialogHeader>
 
@@ -260,8 +265,8 @@ formData.append("image", selectedFile);
           onChange={(e) => {
             const file = e.target.files?.[0];
             if (file) {
-              field.onChange(file); // ✅ تحديث قيمة الفورم
-              setSelectedFile(file); // ✅ إرسال الملف في FormData
+              field.onChange(file); 
+              setSelectedFile(file); 
             }
           }}
         />
@@ -278,7 +283,7 @@ formData.append("image", selectedFile);
             <Button variant="outline">Cancel</Button>
           </DialogClose>
           <Button type="submit" className="cursor-pointer">
-            {isLoading ? <LoaderIcon /> : "Add Worker"}
+            {isLoading ? <LoaderIcon /> : "update Worker"}
           </Button>
         </DialogFooter>
           </form>
@@ -288,4 +293,4 @@ formData.append("image", selectedFile);
     </Dialog>
   );
 };
-export default ModelAddWork;
+export default ModelEditWork;
