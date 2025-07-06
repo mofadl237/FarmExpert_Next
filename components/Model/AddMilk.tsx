@@ -26,41 +26,37 @@ import { Input } from "@/components/ui/input";
 
 import {  workerSchema } from "@/validation";
 import { z } from "zod";
-import {  LoaderIcon, Pencil } from "lucide-react";
+import { Edit, LoaderIcon } from "lucide-react";
 import { useState } from "react";
-import {  IWorker } from "@/interface";
-import {  useUpdateWorkMutation } from "@/store/services/ManagerFarm";
+import { useAddWorkMutation } from "@/store/services/ManagerFarm";
 
-interface IProps{
-    work:IWorker;
-}
-
-const ModelEditWork = ({work}:IProps) => {
+const AddMilk = () => {
   const [open, setOpen] = useState(false);
-  const [updateWork, { isLoading }] = useUpdateWorkMutation();
+  const [addWork, { isLoading }] = useAddWorkMutation();
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
   //2- Handler
   const form = useForm<z.infer<typeof workerSchema>>({
     resolver: zodResolver(workerSchema),
     defaultValues: {
-      name: work.name,
-      nationalID: work.nationalID,
-    age: work.age ? String(work.age) : "",
+      name: "",
+      nationalID: "",
+       age: "" ,
     //   experience: "",
-      specialty: work.specialty,
-      phone: work.phone,
-    //   password:work.password,
-      salary: work.salary,
+      specialty: "",
+      phone: "",
+      password:"",
+      salary: '',
     //   code: "",
-      email: work.email,
-    //   image: work.image,
+      email: "",
+    //   imageUrl: undefined,
     },
   });
 
   // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof workerSchema>) {
     
+      console.log("Add work ====> ",values)
     try {
          const formData = new FormData();
 
@@ -80,10 +76,11 @@ if (!selectedFile) {
   toast.error("Please upload an image.");
   return;
 }
-formData.append("imagePath", selectedFile);
+formData.append("image", selectedFile);
 
-     await updateWork({id:work.id,formData}).unwrap(); 
-    toast.success("Worker Updated successfully.");
+
+     await addWork(formData).unwrap(); 
+    toast.success("Worker added successfully.");
     } catch (error: unknown) {
   const message =
     error instanceof Error ? error.message : "Something went wrong while adding the worker.";
@@ -99,15 +96,14 @@ formData.append("imagePath", selectedFile);
     <Dialog open={open} onOpenChange={setOpen} >
       <DialogTrigger asChild>
         <Button variant="outline" className="flex-auto">
-          <Pencil className="w-4 h-4" />
-          Edit
+          <Edit /> Add Worker
         </Button>
       </DialogTrigger>
 <DialogContent className="sm:max-w-[425px]  md:max-w-[600px] max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle>Edit Worker</DialogTitle>
+          <DialogTitle>Add Worker</DialogTitle>
           <DialogDescription>
-            Do You Want Edit Worker. Click save when you&apos;re done.
+            Do You Want Add New Worker. Click save when you&apos;re done.
           </DialogDescription>
         </DialogHeader>
 
@@ -158,22 +154,18 @@ formData.append("imagePath", selectedFile);
 
             {/* age */}
             <FormField
-  control={form.control}
-  name="age"
-  render={({ field }) => (
-    <FormItem>
-      <FormLabel>Age</FormLabel>
-      <FormControl>
-        <Input
-          {...field}
-          value={field.value ?? ""} 
-          onChange={(e) => field.onChange(e.target.value)} 
-        />
-      </FormControl>
-      <FormMessage />
-    </FormItem>
-  )}
-/>
+              control={form.control}
+              name="age"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Age</FormLabel>
+                  <FormControl>
+                    <Input  {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
             {/* experience */}
             <FormField
@@ -221,7 +213,7 @@ formData.append("imagePath", selectedFile);
             />
 
             {/* salary */}
-            {/* <FormField
+            <FormField
               control={form.control}
               name="password"
               render={({ field }) => (
@@ -233,7 +225,7 @@ formData.append("imagePath", selectedFile);
                   <FormMessage />
                 </FormItem>
               )}
-            /> */}
+            />
 
             {/* code */}
             {/* <FormField
@@ -268,8 +260,8 @@ formData.append("imagePath", selectedFile);
           onChange={(e) => {
             const file = e.target.files?.[0];
             if (file) {
-              field.onChange(file); 
-              setSelectedFile(file); 
+              field.onChange(file); // ✅ تحديث قيمة الفورم
+              setSelectedFile(file); // ✅ إرسال الملف في FormData
             }
           }}
         />
@@ -286,7 +278,7 @@ formData.append("imagePath", selectedFile);
             <Button variant="outline">Cancel</Button>
           </DialogClose>
           <Button type="submit" className="cursor-pointer">
-            {isLoading ? <LoaderIcon /> : "update Worker"}
+            {isLoading ? <LoaderIcon /> : "Add Worker"}
           </Button>
         </DialogFooter>
           </form>
@@ -296,4 +288,4 @@ formData.append("imagePath", selectedFile);
     </Dialog>
   );
 };
-export default ModelEditWork;
+export default AddMilk;

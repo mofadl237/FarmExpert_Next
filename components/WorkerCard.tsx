@@ -42,7 +42,6 @@ export default function WorkerCard({ worker }: IProps) {
   const displayEmail = email || "fadl@gmail.com";
   const displayImage = `https://farmxpertapi.runasp.net${imagePath}`;
 
-  console.log(displayImage);
   return (
     <Card className="w-full max-w-md rounded-md shadow-lg hover:shadow-2xl transition-shadow px-4">
       <CardHeader className="flex flex-col items-center">

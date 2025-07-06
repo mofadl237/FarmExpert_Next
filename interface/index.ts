@@ -85,3 +85,17 @@ export interface IWorker{
   email: string;
   imagePath: File;
 }
+export interface ICattle{
+  cattleID?:number;
+  age:number;
+  weight:number;
+  gender:string;
+  type:string;
+}
+export interface ICattleAdd{
+  cattleID?:number;
+  age:number;
+  weight:number;
+  Gender:string;
+  Type:string;
+}
