@@ -8,7 +8,7 @@ const page =  () => {
     <div className="space-y-6 mt-8 w-full">
      <div className="flex gap-4 ">
        <ModelAddFarm/>
-       <ModelAddManager/>
+       {/* <ModelAddManager/> */}
      </div>
       <FarmRender/>
     </div>

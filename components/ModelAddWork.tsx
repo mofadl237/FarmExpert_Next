@@ -84,7 +84,7 @@ formData.append("image", selectedFile);
     toast.success("Worker added successfully.");
     } catch (error: unknown) {
       const message =
-        (error as IErrorResponse)?.message ||
+        (error as IErrorResponse).message ||
         "Something went wrong while adding the worker.";
       toast.error(message);
     }
@@ -280,7 +280,7 @@ formData.append("image", selectedFile);
             <Button variant="outline">Cancel</Button>
           </DialogClose>
           <Button type="submit" className="cursor-pointer">
-            {isLoading ? <LoaderIcon /> : "Update"}
+            {isLoading ? <LoaderIcon /> : "Add Worker"}
           </Button>
         </DialogFooter>
           </form>

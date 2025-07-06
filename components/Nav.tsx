@@ -9,8 +9,8 @@ import { Menu } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const links = [
-  { path: "vet", label: "Vet" },
-  { path: "e-commerce", label: "E-commerce" },
+  // { path: "vet", label: "Vet" },
+  // { path: "e-commerce", label: "E-commerce" },
   { path: "dashboard", label: "Dashboard" },
 ];
 
