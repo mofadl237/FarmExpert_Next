@@ -4,7 +4,8 @@ import { toast } from "sonner";
 import { ICattle,  } from "@/interface";
 
 import { Button } from "../ui/button";
-import { Edit, TrashIcon } from "lucide-react";
+import {  TrashIcon } from "lucide-react";
+import { EditCattle } from "../Model/EditCattle";
 interface IProps{
   cattel:ICattle;
 }
@@ -28,14 +29,7 @@ const CattleTableAction = ( {cattel} :  IProps) => {
   return (
     <>
       
-      <Button
-        className="cursor-pointer"
-        variant={"secondary"}
-        onClick={onClickAddFarm}
-      >
-       {/* { loading ?  <Loader/> : <Trash />} */}
-       <Edit/>
-      </Button>
+      <EditCattle cattle={cattel} />
       <Button
         className="cursor-pointer"
         variant={"destructive"}

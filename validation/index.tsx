@@ -61,14 +61,14 @@ export const workerSchema = z.object({
 });
 
 export const CattleSchema = z.object({
-  Type: z.string({
+  type: z.string({
     required_error: "Please select an email to display.",
   }),
   weight: z.number({
     required_error: "Weight is required",
     invalid_type_error: "Weight must be a number",
   }),
-  Gender:z.string({message:"Gender Is Required"}),
+  gender:z.string({message:"Gender Is Required"}),
   age:z.number({
     required_error: "Age is required",
     invalid_type_error: "Age must be a number",

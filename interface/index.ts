@@ -92,10 +92,10 @@ export interface ICattle{
   gender:string;
   type:string;
 }
-export interface ICattleAdd{
-  cattleID?:number;
-  age:number;
-  weight:number;
-  Gender:string;
-  Type:string;
-}
+// export interface ICattleAdd{
+//   cattleID?:number;
+//   age:number;
+//   weight:number;
+//   Gender:string;
+//   Type:string;
+// }

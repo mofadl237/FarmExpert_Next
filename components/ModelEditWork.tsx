@@ -44,16 +44,16 @@ const ModelEditWork = ({work}:IProps) => {
   const form = useForm<z.infer<typeof workerSchema>>({
     resolver: zodResolver(workerSchema),
     defaultValues: {
-      name: work.name,
-      nationalID: work.nationalID,
+      name: work.name ?? "",
+      nationalID: work.nationalID ??"",
     age: work.age ? String(work.age) : "",
     //   experience: "",
-      specialty: work.specialty,
-      phone: work.phone,
+      specialty: work.specialty ?? "",
+      phone: work.phone ?? "",
     //   password:work.password,
-      salary: work.salary,
+      salary: work.salary ?? "",
     //   code: "",
-      email: work.email,
+      email: work.email ?? "",
     //   image: work.image,
     },
   });
@@ -67,7 +67,7 @@ const ModelEditWork = ({work}:IProps) => {
     // Append each field
     formData.append("name", values.name);
     formData.append("nationalID", values.nationalID);
-    formData.append("age", values.age);
+    formData.append("age", String(values.age));
     // formData.append("experience", values.experience);
     formData.append("specialty", values.specialty);
     formData.append("phone", values.phone);
@@ -221,7 +221,7 @@ formData.append("imagePath", selectedFile);
             />
 
             {/* salary */}
-            {/* <FormField
+            <FormField
               control={form.control}
               name="password"
               render={({ field }) => (
@@ -233,7 +233,7 @@ formData.append("imagePath", selectedFile);
                   <FormMessage />
                 </FormItem>
               )}
-            /> */}
+            />
 
             {/* code */}
             {/* <FormField

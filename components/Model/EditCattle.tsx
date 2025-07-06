@@ -34,67 +34,66 @@ import {
 } from "@/components/ui/select";
 import { CattleSchema } from "@/validation";
 import { useState } from "react";
-import { LoaderIcon, Plus } from "lucide-react";
+import { Edit, LoaderIcon } from "lucide-react";
 import { Input } from "../ui/input";
-import { useAddCattleMutation } from "@/store/services/ManagerFarm";
-import { IErrorResponse } from "@/interface";
+import { ICattle, IErrorResponse } from "@/interface";
+import { useUpdateCattleMutation } from "@/store/services/ManagerFarm";
 
-export function AddCattle() {
+interface IProps {
+  cattle: ICattle;
+}
+
+export function EditCattle({ cattle }: IProps) {
   //1- State
   const [open, setOpen] = useState(false);
-  const [addCattle,{isLoading}] = useAddCattleMutation();
+  const [updateCattle, { isLoading }] = useUpdateCattleMutation();
 
   //2- Handler
 
   const form = useForm<z.infer<typeof CattleSchema>>({
     resolver: zodResolver(CattleSchema),
     defaultValues: {
-      gender: "",
-      type: "",
-      age: 0,
-      weight: 0,
+      gender: cattle.gender,
+      type: cattle.type,
+      age: cattle.age,
+      weight: cattle.weight,
     },
   });
 
   async function onSubmit(data: z.infer<typeof CattleSchema>) {
     try {
-      const formData = new FormData();
-      formData.append("Type", data.type);
-      formData.append("Gender", data.gender);
-      formData.append("weight", String(data.weight));
-      formData.append("age", String(data.age));
-      await addCattle(formData).unwrap();
-      toast.success("Worker added successfully.");
+        if(typeof cattle.cattleID !== 'undefined'){
+
+            await updateCattle({ id: cattle.cattleID, body: data }).unwrap();
+        }
+      toast.success("Cattle Updated successfully.");
     } catch (error: unknown) {
       const message =
         (error as IErrorResponse)?.data?.message ||
-        "Something went wrong while adding the manager.";
+        "Something went wrong while Update the Cattle.";
       toast.error(message);
     }
     form.reset();
-    setOpen(false)
+    setOpen(false);
   }
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button variant="outline" className="flex-auto">
-          <Plus /> Add Cattle
+          <Edit />
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]  max-h-[90vh] ">
+      <DialogContent className="sm:max-w-[425px]  max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle>Add Cattle</DialogTitle>
+          <DialogTitle>Edit Cattle</DialogTitle>
           <DialogDescription>
-            Do You Want Add New Cattle. Click save when you&apos;re done.
+            Do You Want Edit. Click save when you&apos;re done.
           </DialogDescription>
         </DialogHeader>
 
         <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(onSubmit)}
-            className=" space-y-6"
-          >
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             <FormField
               control={form.control}
               name="type"
@@ -154,7 +153,7 @@ export function AddCattle() {
                   <FormControl>
                     <Input
                       type="number"
-                      {...field}
+                      value={field.value}
                       onChange={(e) => field.onChange(e.target.valueAsNumber)}
                     />
                   </FormControl>
@@ -171,7 +170,7 @@ export function AddCattle() {
                   <FormControl>
                     <Input
                       type="number"
-                      {...field}
+                      value={field.value}
                       onChange={(e) => field.onChange(e.target.valueAsNumber)}
                     />
                   </FormControl>
@@ -185,8 +184,7 @@ export function AddCattle() {
                 <Button variant="outline">Cancel</Button>
               </DialogClose>
               <Button type="submit" className="cursor-pointer">
-                {isLoading ? <LoaderIcon /> : "Add Cattle"}
-                
+                {isLoading ? <LoaderIcon /> : "Edit Cattle"}
               </Button>
             </DialogFooter>
           </form>
