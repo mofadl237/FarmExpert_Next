@@ -16,7 +16,7 @@ export default async function Page() {
       <Navbar/>
       <div className='flex justify-center items-center w-full h-screen'>
 
-    <div className="w-full md:w-1/2 rounded-md bg-gradient-to-br p-3 from-yellow-200 via-yellow-400 to-red-300">
+    <div className="w-full md:w-1/2 rounded-md bg-gradient-to-br p-3 from-[#4cb050] to-[#2980b9]">
     <AnimatedHeader title={'Welcome Dashboard'} center/>
 
     <LoginForm/>
