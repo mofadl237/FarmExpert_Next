@@ -1,8 +1,11 @@
+import RenderAlert from "@/components/RenderClient/RenderAlerts";
 
 const page = () => {
   return (
-    <div>page Alerts</div>
-  )
-}
+    <div className=" mt-8 ">
+      <RenderAlert />
+    </div>
+  );
+};
 
-export default page
+export default page;

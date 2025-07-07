@@ -32,43 +32,39 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { CattleSchema } from "@/validation";
+import {  NotificationSchema } from "@/validation";
 import { useState } from "react";
-import { LoaderIcon, Plus } from "lucide-react";
+import {  LoaderIcon, Plus } from "lucide-react";
 import { Input } from "../ui/input";
-import { useAddCattleMutation } from "@/store/services/ManagerFarm";
 import { IErrorResponse } from "@/interface";
+import { Textarea } from "../ui/textarea";
+import { useAddNotificationMutation, useGetWorkerQuery } from "@/store/services/ManagerFarm";
 
-export function AddCattle() {
+export function SendNotification() {
   //1- State
   const [open, setOpen] = useState(false);
-  const [addCattle,{isLoading}] = useAddCattleMutation();
-
+  const {data} =useGetWorkerQuery();
+  const [addNotification, {isLoading}] =useAddNotificationMutation()
   //2- Handler
 
-  const form = useForm<z.infer<typeof CattleSchema>>({
-    resolver: zodResolver(CattleSchema),
+  const form = useForm<z.infer<typeof NotificationSchema>>({
+    resolver: zodResolver(NotificationSchema),
     defaultValues: {
-      gender: "",
-      type: "",
-      age: 0,
-      weight: 0,
+      email: "",
+      title: "",
+      message: "",
+      
     },
   });
 
-  async function onSubmit(data: z.infer<typeof CattleSchema>) {
+  async function onSubmit(data: z.infer<typeof NotificationSchema>) {
     try {
-      const formData = new FormData();
-      formData.append("Type", data.type);
-      formData.append("Gender", data.gender);
-      formData.append("weight", String(data.weight));
-      formData.append("age", String(data.age));
-      await addCattle(formData).unwrap();
-      toast.success("Cattle added successfully.");
+      await addNotification(data)
+      toast.success("Send Notification successfully.");
     } catch (error: unknown) {
       const message =
         (error as IErrorResponse)?.data?.message ||
-        "Something went wrong while adding the Cattle.";
+        "Something went wrong while adding the manager.";
       toast.error(message);
     }
     form.reset();
@@ -79,14 +75,14 @@ export function AddCattle() {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button variant="outline" className="flex-auto">
-          <Plus /> Add Cattle
+          <Plus /> Send Notification
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]  max-h-[90vh] ">
         <DialogHeader>
-          <DialogTitle>Add Cattle</DialogTitle>
+          <DialogTitle>Send Notification For Staff</DialogTitle>
           <DialogDescription>
-            Do You Want Add New Cattle. Click save when you&apos;re done.
+            Do You Want Send. Click save when you&apos;re done.
           </DialogDescription>
         </DialogHeader>
 
@@ -97,66 +93,43 @@ export function AddCattle() {
           >
             <FormField
               control={form.control}
-              name="type"
+              name="email"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Type : </FormLabel>
+                <FormItem >
+                  <FormLabel>Email Staff : </FormLabel>
                   <Select
                     onValueChange={field.onChange}
                     defaultValue={field.value}
                   >
                     <FormControl>
                       <SelectTrigger>
-                        <SelectValue placeholder="Select a verified Type to display" />
+                        <SelectValue placeholder="Select a verified Email to display" />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      <SelectItem value="Cow">Cow</SelectItem>
-                      <SelectItem value="Sheep">Sheep</SelectItem>
-                      <SelectItem value="Buffalo">Buffalo</SelectItem>
+                      {data?.map((staff) => (
+
+                      <SelectItem key={staff.id} value={staff.email}>{staff.email}</SelectItem>
+                      ))}
+                      
                     </SelectContent>
                   </Select>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <FormField
-              control={form.control}
-              name="gender"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Gender : </FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select a verified Type to display" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      <SelectItem value="Female">Female</SelectItem>
-                      <SelectItem value="Male">Male</SelectItem>
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+           
 
             <FormField
               control={form.control}
-              name="weight"
+              name="title"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Weight : </FormLabel>
+                  <FormLabel>Title : </FormLabel>
                   <FormControl>
                     <Input
-                    min={0}
-                      type="number"
-                      {...field}
-                      onChange={(e) => field.onChange(e.target.valueAsNumber)}
+                    placeholder="Task Address"
+                   {...field}
                     />
                   </FormControl>
                   <FormMessage />
@@ -165,17 +138,13 @@ export function AddCattle() {
             />
             <FormField
               control={form.control}
-              name="age"
+              name="message"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Age : </FormLabel>
+                  <FormLabel>Message : </FormLabel>
                   <FormControl>
-                    <Input
-                    min={0}
-                      type="number"
-                      {...field}
-                      onChange={(e) => field.onChange(e.target.valueAsNumber)}
-                    />
+                    <Textarea placeholder="Description For Task" {...field}/>
+                    
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -187,8 +156,8 @@ export function AddCattle() {
                 <Button variant="outline">Cancel</Button>
               </DialogClose>
               <Button type="submit" className="cursor-pointer">
-                {isLoading ? <LoaderIcon /> : "Add Cattle"}
-                
+                {isLoading ? <LoaderIcon /> : "Send Notification"}
+                {/* Send Notification */}
               </Button>
             </DialogFooter>
           </form>

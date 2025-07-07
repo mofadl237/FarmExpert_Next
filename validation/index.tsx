@@ -90,3 +90,15 @@ export const MilkSchema = z.object({
   notes:z.string({message:"Notes Is Required"}),
  
 });
+
+export const NotificationSchema = z.object({
+  email: z.string().regex(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, {
+    message: "Email must be a valid format like example@email.com",
+  }),
+  title: z.string().min(2, {
+    message: "Title must be Required",
+  }),
+  message: z.string().min(2, {
+    message: "Message must be Required",
+  }),
+});

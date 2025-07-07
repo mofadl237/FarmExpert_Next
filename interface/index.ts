@@ -100,6 +100,13 @@ export interface IMilk{
   notes:string;
   date?:Date;
 }
+export interface ISendNotification{
+  
+  email:string;
+  message:string;
+  title:string;
+ 
+}
 // export interface ICattleAdd{
 //   cattleID?:number;
 //   age:number;

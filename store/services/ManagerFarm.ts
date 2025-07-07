@@ -1,4 +1,4 @@
-import { ICattle, IMilk, IWorker } from "@/interface";
+import { ICattle, IMilk, ISendNotification, IWorker } from "@/interface";
 import { getToken } from "@/lib/utils";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
@@ -60,6 +60,14 @@ export const ManagerFarmApiSlice = createApi({
     addMilk: build.mutation<void, IMilk>({
       query: (body) => ({
         url: "/MilkProduction/Add",
+        method: "Post",
+        body,
+      }),
+      invalidatesTags: ["ManagerFarm"],
+    }),
+    addNotification: build.mutation<void, ISendNotification>({
+      query: (body) => ({
+        url: "/Notification/custom",
         method: "Post",
         body,
       }),
@@ -133,4 +141,5 @@ export const {
   useAddMilkMutation,
   useUpdateMilkMutation,
   useDeleteMilkMutation,
+  useAddNotificationMutation,
 } = ManagerFarmApiSlice;

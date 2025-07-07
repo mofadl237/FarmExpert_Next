@@ -108,7 +108,7 @@ const EditMilk = ({ milk }: IProps) => {
                   <FormControl>
                     <Input
                       type="number"
-                      value={field.value ?? 0}
+                      {...field}
                       onChange={(e) => field.onChange(Number(e.target.value))}
                     />
                   </FormControl>
@@ -126,7 +126,7 @@ const EditMilk = ({ milk }: IProps) => {
                   <FormControl>
                     <Input
                       type="number"
-                      value={field.value ?? 0}
+                      {...field}
                       onChange={(e) => field.onChange(Number(e.target.value))}
                     />
                   </FormControl>
