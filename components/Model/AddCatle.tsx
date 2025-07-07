@@ -153,6 +153,7 @@ export function AddCattle() {
                   <FormLabel>Weight : </FormLabel>
                   <FormControl>
                     <Input
+                    min={0}
                       type="number"
                       {...field}
                       onChange={(e) => field.onChange(e.target.valueAsNumber)}
@@ -170,6 +171,7 @@ export function AddCattle() {
                   <FormLabel>Age : </FormLabel>
                   <FormControl>
                     <Input
+                    min={0}
                       type="number"
                       {...field}
                       onChange={(e) => field.onChange(e.target.valueAsNumber)}

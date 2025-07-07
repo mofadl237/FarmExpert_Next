@@ -1,36 +1,42 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🐄 Farm Management System
 
-## Getting Started
+This project is a **complete farm management dashboard** that allows for full control and monitoring of daily operations in a livestock farm. It provides distinct user roles and tailored access for:
 
-First, run the development server:
+- 🧑‍💼 **Admin** – Full control over users and the entire system.  
+- 👨‍🌾 **Farm Manager** – Manages animals, workers, and farm activities.  
+- 🧑‍🔧 **Farm Staff** – Limited access to daily tasks and operations.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Try the Dashboard
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+You can try the system using one of the demo accounts below:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Role          | Email           | Password     |
+|---------------|------------------|--------------|
+| Admin         | `A1@gmail.com`    | `1234512345` |
+| Manager Farm  | `m2@gmail.com`    | `1234512345` |
+| Staff Worker  | `W5@gmail.com`    | `1234512345` |
 
-## Learn More
+> 📝 Each account has a different access level and experience tailored to their role.
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 💡 Key Features
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- 🐄 Add, sell, and manage animals
+- 👷 Manage farm workers and their activities
+- 📦 Track resources and production
+- 📊 Dashboard with insights and statistics
+- 🔐 Role-based authentication and permissions
+- 📱 Responsive and modern UI using Next.js & Tailwind
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🛠 Tech Stack
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Frontend:** Next.js, React, TypeScript, Tailwind CSS, ShadCN UI, Framer Motion 
+- **State Management & API:** Redux Toolkit Query  
+
+---
+
