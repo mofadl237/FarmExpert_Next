@@ -53,7 +53,7 @@ export default function PieChartCard({ title, data ,COLORS}: IProps) {
           </div>
           ))}
         </div>
-        <Badge className="w-full py-3 "
+        <Badge className="w-full py-3 font-bold text-xl"
         style={{ backgroundColor: COLORS[2] }}>Total - {title} - {Total}</Badge>
       </Card>
     </div>

@@ -45,11 +45,11 @@ export  function AppSidebar() {
     
 
   admin: [
-    {
-      title: "Home",
-      url: `/en/dashboard`,
-      icon: Home,
-    },
+    // {
+    //   title: "Home",
+    //   url: `/en/dashboard`,
+    //   icon: Home,
+    // },
     {
       title: "All Farms",
       url: `/en/dashboard/farms`,
@@ -126,7 +126,7 @@ export  function AppSidebar() {
     },
     {
       title: "LogOut",
-      // url: `/en/login`,
+      url: `/en/login`,
       icon: LogOut,
     },
   ],
@@ -137,7 +137,6 @@ export  function AppSidebar() {
 const Logout =()=>{
   removeToken()
 redirect('/en/login');
-
 }
 
 

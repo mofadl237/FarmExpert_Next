@@ -60,6 +60,7 @@ export function SendNotification() {
   async function onSubmit(data: z.infer<typeof NotificationSchema>) {
     try {
       await addNotification(data)
+      console.log(data)
       toast.success("Send Notification successfully.");
     } catch (error: unknown) {
       const message =
