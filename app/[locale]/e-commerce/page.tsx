@@ -1,8 +1,7 @@
 
-
 const page = () => {
   return (
-    <div>E-commerce</div>
+    <div>E-commerce </div>
   )
 }
 

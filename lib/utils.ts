@@ -17,3 +17,7 @@ export const getToken = () => {
 export const removeToken =  () => {
     return localStorage.removeItem('token')
 };
+
+export const getMaxLength = (str:string) =>{
+  return str.slice(0,15);
+}

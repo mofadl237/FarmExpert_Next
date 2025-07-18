@@ -1,4 +1,4 @@
-import { ICattle, IMilk, ISendNotification, IWorker } from "@/interface";
+import { IAlert, ICattle, IMilk, ISendNotification, IWorker } from "@/interface";
 import { getToken } from "@/lib/utils";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
@@ -10,7 +10,6 @@ export const ManagerFarmApiSlice = createApi({
     prepareHeaders: (headers) => {
       if (typeof window !== "undefined") {
         const token = getToken();
-        console.log("token");
         if (token) headers.set("Authorization", `Bearer ${token}`);
       }
       return headers;
@@ -35,6 +34,19 @@ export const ManagerFarmApiSlice = createApi({
     getMilk: build.query<IMilk[], void>({
       query: () => ({
         url: `/MilkProduction/All`,
+      }),
+      providesTags: ["ManagerFarm"],
+    }),
+
+    getAlerts:build.query <IAlert[],void>({
+      query:()=>({
+        url:`/Notification/all-worker-notifications`
+      }),
+      providesTags: ["ManagerFarm"],
+    }),
+    getAlertsWorker:build.query <IAlert[],string>({
+      query:(email)=>({
+        url:`/Notification/worker-notifications?email=${email}`
       }),
       providesTags: ["ManagerFarm"],
     }),
@@ -101,6 +113,13 @@ export const ManagerFarmApiSlice = createApi({
       invalidatesTags: ["ManagerFarm"],
     }),
 
+    readAlert:build.mutation<void,{id:number}>({
+      query:({id})=>({
+        url:`/Notification/mark-as-read/${id}`,
+        method:"PUT"
+      }),
+      invalidatesTags: ["ManagerFarm"],
+    }),
     //4- Delete
 
     deleteWork: build.mutation<void, { id: number }>({
@@ -124,6 +143,13 @@ export const ManagerFarmApiSlice = createApi({
       }),
       invalidatesTags: ["ManagerFarm"],
     }),
+    deleteNotification:build.mutation<void, {id:number}>({
+      query:({id})=>({
+        url:`/Notification/delete/${id}`,
+        method:"DELETE"
+      }),
+      invalidatesTags: ["ManagerFarm"],
+    })
   }),
 });
 
@@ -142,4 +168,8 @@ export const {
   useUpdateMilkMutation,
   useDeleteMilkMutation,
   useAddNotificationMutation,
+  useGetAlertsQuery,
+  useDeleteNotificationMutation,
+  useGetAlertsWorkerQuery,
+  useReadAlertMutation,
 } = ManagerFarmApiSlice;

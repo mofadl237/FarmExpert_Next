@@ -50,7 +50,7 @@ export function RequestTable() {
       <TableFooter>
         <TableRow>
           <TableCell colSpan={6}>Total</TableCell>
-          <TableCell className="text-right">{requests?.length ? requests.length : 'you Do nt Any Todo Yet !!'}</TableCell>
+          <TableCell className="text-right">{requests?.length ? requests.length : 'you Do nt Any Request Yet !!'}</TableCell>
         </TableRow>
       </TableFooter>
     </Table>

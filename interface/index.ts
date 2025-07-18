@@ -31,6 +31,11 @@ export interface IErrorResponse {
     message: string;
   };
 }
+export interface IErrorResponseMessage {
+  
+    message: string;
+
+}
 export interface IRequest {
   id: number;
   email: string;
@@ -102,10 +107,10 @@ export interface ISendNotification {
   title: string;
 }
 // export interface IDataMilk {
- 
+
 //     date: string;
 //     total: string;
-  
+
 // }
 // export interface ICattleAdd{
 //   cattleID?:number;
@@ -114,3 +119,14 @@ export interface ISendNotification {
 //   Gender:string;
 //   Type:string;
 // }
+
+export interface IAlert {
+  id: number;
+  userId: string;
+  name: string;
+  email: string;
+  title: string;
+  message: string;
+  isRead: boolean;
+  createdAt: Date;
+}

@@ -1,9 +1,12 @@
 import RenderAlert from "@/components/RenderClient/RenderAlerts";
 
+
 const page = () => {
+  //1- state
   return (
-    <div className=" mt-8 ">
+    <div className=" mt-8  space-y-4">
       <RenderAlert />
+      
     </div>
   );
 };

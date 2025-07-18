@@ -44,7 +44,7 @@ export function LoginForm() {
       form.reset();
         router.push("/en/dashboard");
     } catch (error: unknown) {
-        console.log(error)
+        
       const errorMessage =
         (error as { data?: { message?: string } })?.data?.message ||
         "Error Login Dashboard.";

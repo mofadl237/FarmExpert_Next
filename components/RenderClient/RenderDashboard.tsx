@@ -6,12 +6,12 @@ import { jwtDecode } from "jwt-decode";
 import {
   useGetCattleQuery,
   useGetMilkQuery,
-  useGetWorkerQuery,
 } from "@/store/services/ManagerFarm";
 import { useGetFarmsQuery } from "@/store/services/Farm";
 import { useGetManagersQuery } from "@/store/services/Manager";
 import { useGetRequestsQuery } from "@/store/services/Request";
 import AnalysisManager from "../DataAnalysis/AnalysisManager";
+import AnalysisWorker from "../DataAnalysis/AnalysisWorker";
 
 const RenderDashboard = () => {
   //1- state Get Data
@@ -21,7 +21,7 @@ const RenderDashboard = () => {
   const { data: Cows } = useGetCattleQuery({ typeCattle: "Cow" });
   const { data: Buffalo } = useGetCattleQuery({ typeCattle: "Buffalo" });
   const { data: Sheep } = useGetCattleQuery({ typeCattle: "Sheep" });
-  const { data: Staff } = useGetWorkerQuery();
+  // const { data: Staff } = useGetWorkerQuery();
   const { data: Milk } = useGetMilkQuery();
   //
   const chartDataMilk = Milk?.map((item) => ({
@@ -81,20 +81,7 @@ const RenderDashboard = () => {
   }
   if (role === "Worker") {
     return (
-      <div className="w-full h-screen   ">
-        <h1>
-          Show Data Analysis For {role} - {email} FarmerId - {FarmId}
-        </h1>
-        <div className="bg-red-600 p-5 rounded-md border-md text-white">
-          <h1>
-            Counting Cattle == Sheep -- {Sheep?.length ? Sheep?.length : "0"} --
-            Cows -- {Cows?.length ? Cows?.length : "0"}
-            -- Buffalo -- {Buffalo?.length ? Buffalo?.length : "0"}
-          </h1>
-          <h1>Counting Staff {Staff?.length}</h1>
-          <h1>Counting Milk Litre {MilkLitre}</h1>
-        </div>
-      </div>
+    <AnalysisWorker role={role} FarmId={FarmId} email={email} chartDataMilk={chartDataMilk ?? []} MilkLitre={MilkLitre}   PieDataCattle={PieDataCattle} />
     );
   }
 };

@@ -4,6 +4,8 @@ import { getToken } from "@/lib/utils";
 import { IJwtPayload } from "@/interface";
 import { jwtDecode } from "jwt-decode";
 import { SendNotification } from "../Model/SendNotification";
+import { AlertWorkTable } from '@/components/Table/AlertWorkTable';
+import { AlertTable } from '@/components/Table/AlertTable';
 
 const RenderAlert = () => {
   const token = getToken();
@@ -24,21 +26,24 @@ const RenderAlert = () => {
 
   if (role === "manager") {
     return (
-      <div className="w-full h-screen space-y-4 ">
+      <div className="w-full space-y-4 ">
         <SendNotification />
-        <h1>
+        {/* bg-gradient-to-r from-green-300 via-green-500 to-emerald-600 bg-clip-text text-transparent */}
+        <h1 className="text-center text-transparent bg-gradient-to-l from-[#00e676]  to-[#2979ff] bg-clip-text">
           I Manager For Send && Delete && Edit Alert {role} - {email} FarmerId -{" "}
           {FarmId}
         </h1>
+        <AlertTable/> 
       </div>
     );
   }
   if (role === "Worker") {
     return (
-      <div className="w-full h-screen flex justify-center items-center ">
+      <div className="w-full space-y-4 ">
         <h1>
           I Worker For Show Alert {role} - {email} FarmerId - {FarmId}
         </h1>
+        <AlertWorkTable/>
       </div>
     );
   }
