@@ -24,6 +24,14 @@ export function CattleTable() {
   //1- state get Cattles From Api
   const [selectType, setSelectType] = useState("Cow");
   const { data: Cattels } = useGetCattleQuery({ typeCattle: selectType });
+  const { data: Cow } = useGetCattleQuery({ typeCattle: "Cow" });
+  const { data: Buffalo } = useGetCattleQuery({ typeCattle: "Buffalo" });
+  const { data: Sheep } = useGetCattleQuery({ typeCattle: "Sheep" });
+const AlllCattels = [
+  ...(Cow || []),
+  ...(Buffalo || []),
+  ...(Sheep || []),
+];
   //2- Handler
   const downloadPDF = ()=>{
     const pdf = new jsPDF();
@@ -31,7 +39,7 @@ export function CattleTable() {
     autoTable(pdf, {
       startY: 20,
       head: [["ID", "Type", "Gender", "Weight", "Age"]],
-      body: Cattels?.map((cattel) => [
+      body: AlllCattels?.map((cattel) => [
         cattel.cattleID ?? '',
         cattel.type ?? '',
         cattel.gender ?? '',

@@ -1,4 +1,4 @@
-import RenderAlert from "@/components/RenderClient/RenderAlerts";
+import RenderAlert from "@/components/Render/RenderAlerts";
 
 
 const page = () => {

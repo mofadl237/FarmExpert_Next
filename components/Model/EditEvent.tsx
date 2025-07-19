@@ -33,22 +33,34 @@ import {
 } from "@/components/ui/select";
 import { EventSchema } from "@/validation";
 import { useState } from "react";
-import { LoaderIcon, Plus } from "lucide-react";
+import { Edit2, LoaderIcon } from "lucide-react";
 import { Input } from "@/components/ui/input";
-import { useAddCattleActivityMutation } from "@/store/services/ManagerFarm";
 import { toast } from "sonner";
-import { IErrorResponse } from "@/interface";
+import { IErrorResponse, IEvent } from "@/interface";
+import { useUpdateEventMutation } from "@/store/services/ManagerFarm";
 
-export function AddEvent() {
+interface IProps{
+    event:IEvent;
+}
+export function EditEvent({event}:IProps) {
   //1- State
   const [open, setOpen] = useState(false);
-  const [addEvent, { isLoading }] = useAddCattleActivityMutation();
+  const [updateEvent, { isLoading }] = useUpdateEventMutation();
   //2- Handler addEvent
 
   const form = useForm<z.infer<typeof EventSchema>>({
     resolver: zodResolver(EventSchema),
     defaultValues: {
-      Date: new Date(),
+      Date: event?.date ? new Date(event.date) : new Date(),
+      CalfGender:event?.calfGender,
+      Dosage:event?.dosage,
+      EventType:event?.eventType,
+      TagNumber:event?.tagNumber,
+      Medicine:event?.medicine,
+      Notes:event?.notes,
+      VaccineType:event?.vaccineType,
+      Weight:event?.weight,
+      WithdrawalTime:event?.withdrawalTime,
     },
   });
   const selectedType = form.watch("EventType");
@@ -85,14 +97,14 @@ export function AddEvent() {
         formData.append("Date", data.Date.toISOString());
       }
 
-      await addEvent(formData).unwrap();
-      toast.success("Event added successfully.");
+      await updateEvent({id:event.id! , body:formData}).unwrap();
+      toast.success("Event Updated successfully.");
       form.reset();
       setOpen(false);
     } catch (error: unknown) {
       const message =
         (error as IErrorResponse)?.data?.message ||
-        "Something went wrong while adding the Event.";
+        "Something went wrong while Updated the Event.";
       toast.error(message);
     }
   }
@@ -101,14 +113,14 @@ export function AddEvent() {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button variant="outline" className="flex-auto">
-          <Plus /> Add Event
+          <Edit2 /> Edit Event
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]  max-h-[90vh] overflow-y-auto ">
         <DialogHeader>
-          <DialogTitle>Add Event</DialogTitle>
+          <DialogTitle>Edit Event</DialogTitle>
           <DialogDescription>
-            Do You Want Add New Event. Click save when you&apos;re done.
+            Do You Want Edit New Event. Click save when you&apos;re done.
           </DialogDescription>
         </DialogHeader>
 
@@ -408,7 +420,7 @@ export function AddEvent() {
                 <Button variant="outline">Cancel</Button>
               </DialogClose>
               <Button type="submit" className="cursor-pointer">
-                {isLoading ? <LoaderIcon /> : "Add Event"}
+                {isLoading ? <LoaderIcon /> : "Update Event"}
               </Button>
             </DialogFooter>
           </form>

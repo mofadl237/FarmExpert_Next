@@ -131,14 +131,15 @@ export interface IAlert {
   createdAt: Date;
 }
 export interface IEvent {
-  EventType: string;
-  TagNumber: number;
-  Weight?: number;
-  Notes?: string;
-  Medicine?: string;
-  Dosage?: string;
-  WithdrawalTime?: string;
-  CalfGender?: string;
-  VaccineType?: string;
-  Date?: Date;
+  id?:number;
+  eventType: string;
+  tagNumber: number;
+  weight?: number;
+  notes?: string;
+  medicine?: string;
+  dosage?: string;
+  withdrawalTime?: string;
+  calfGender?: string;
+  vaccineType?: string;
+  date?: Date;
 }

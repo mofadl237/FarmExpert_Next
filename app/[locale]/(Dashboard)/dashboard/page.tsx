@@ -1,4 +1,4 @@
-import RenderDashboard from "@/components/RenderClient/RenderDashboard"
+import RenderDashboard from "@/components/Render/RenderDashboard"
 
 const page = () => {
   return (

@@ -1,4 +1,4 @@
-import { IAlert, ICattle, IMilk, ISendNotification, IWorker } from "@/interface";
+import { IAlert, ICattle, IEvent, IMilk, ISendNotification, IWorker } from "@/interface";
 import { getToken } from "@/lib/utils";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
@@ -50,7 +50,12 @@ export const ManagerFarmApiSlice = createApi({
       }),
       providesTags: ["ManagerFarm"],
     }),
-
+getEvents:build.query<IEvent[],void>({
+  query:()=>({
+    url:'/CattleActivityIND/AllEvents',
+  }),
+   providesTags: ["ManagerFarm"],
+}),
     //2- Add
 
     addWork: build.mutation<void, FormData>({
@@ -120,6 +125,14 @@ addCattleActivity:build.mutation<void,FormData>({
       }),
       invalidatesTags: ["ManagerFarm"],
     }),
+    updateEvent: build.mutation<void, { id: number; body:FormData }>({
+      query: ({ id, body }) => ({
+        url: `/CattleActivityIND/EditEvent/${id}`,
+        method: "PUT",
+        body,
+      }),
+      invalidatesTags: ["ManagerFarm"],
+    }),
 
     readAlert:build.mutation<void,{id:number}>({
       query:({id})=>({
@@ -157,7 +170,15 @@ addCattleActivity:build.mutation<void,FormData>({
         method:"DELETE"
       }),
       invalidatesTags: ["ManagerFarm"],
-    })
+    }),
+    deleteEvent:build.mutation<void, {id:number}>({
+      query:({id})=>({
+        url:`/CattleActivityIND/DeleteEvent/${id}`,
+        method:"DELETE"
+      }),
+      invalidatesTags: ["ManagerFarm"],
+    }),
+
   }),
 });
 
@@ -181,4 +202,7 @@ export const {
   useGetAlertsWorkerQuery,
   useReadAlertMutation,
   useAddCattleActivityMutation,
+  useGetEventsQuery,
+  useDeleteEventMutation,
+  useUpdateEventMutation,
 } = ManagerFarmApiSlice;
