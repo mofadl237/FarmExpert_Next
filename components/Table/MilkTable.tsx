@@ -12,18 +12,40 @@ import {
 import { Badge } from "@/components/ui/badge";
 import MilkTableAction from "./MilkTableAction";
 import { useGetMilkQuery } from "@/store/services/ManagerFarm";
+import { Button } from "../ui/button";
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
 
 export function MilkTable() {
 
   //1- state get Requests From Api
   const { data: milks } = useGetMilkQuery();
-  
+  const downloadPDF = ()=>{
+    const pdf = new jsPDF();
+    pdf.text("Milk Report", 14, 10);
+    autoTable(pdf,{
+      startY: 20,
+      head: [["Cow ID", "am", "pm", "Total", "Notes","Date"]],
+      body:milks?.map((milk) => [
+        milk.tagNumber??'',
+        milk.am ?? '',
+        milk.pm ?? '',
+        milk.total ??'',
+        milk.notes ?? '',
+         milk.date
+    ? new Date(milk.date).toLocaleDateString("en-GB")
+    : '',
+      ] )|| []
+    })
+    pdf.save('Milk.pdf')
+  }
   return (
+    <>
     <Table>
       <TableCaption>Requests </TableCaption>
       <TableHeader>
         <TableRow>
-          <TableHead>ID Cow</TableHead>
+          <TableHead>Cow ID</TableHead>
           <TableHead>Am</TableHead>
           <TableHead>Pm</TableHead>
           <TableHead>Total</TableHead>
@@ -69,5 +91,8 @@ export function MilkTable() {
         </TableRow>
       </TableFooter>
     </Table>
+    <Button className='bg-secondary w-full'  onClick={downloadPDF}>DOWNLOAD PDF</Button>
+    
+    </>
   );
 }

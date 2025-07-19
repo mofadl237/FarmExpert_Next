@@ -102,3 +102,38 @@ export const NotificationSchema = z.object({
     message: "Message must be Required",
   }),
 });
+
+
+export const EventSchema = z.object({
+  EventType: z.string().min(2, {
+    message: "Event Type must be",
+  }),
+  TagNumber: z.number({
+    invalid_type_error: "TagNumber must be a number",
+  }),
+  Weight: z.number({
+    invalid_type_error: "Weight must be a number",
+  }).optional(),
+  Notes: z.string().min(2, {
+    message: "Notes must be Required",
+  }).optional(),
+  Medicine: z.string().min(2, {
+    message: "Medicine must be Required",
+  }).optional(),
+  Dosage: z.string().min(2, {
+    message: "Dosage must be Required",
+  }).optional(),
+  WithdrawalTime: z.string().min(2, {
+    message: "WithdrawalTime must be Required",
+  }).optional(),
+  CalfGender: z.string().min(2, {
+    message: "CalfGender must be Required",
+  }).optional(),
+  VaccineType: z.string().min(2, {
+    message: "VaccineType must be Required",
+  }).optional(),
+  Date: z.date({
+    required_error: "Date is required",
+  }).optional(),
+});
+

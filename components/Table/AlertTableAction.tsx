@@ -5,7 +5,6 @@ import { IAlert, IErrorResponse } from "@/interface";
 
 import { toast } from "sonner";
 
-import { EditNotification } from "../Model/EditNotfication";
 import AlertDelete from "../AlertDelete";
 import { useDeleteNotificationMutation } from "@/store/services/ManagerFarm";
 interface IProps {
@@ -28,7 +27,7 @@ const AlertTableAction = ({ Alert }: IProps) => {
   };
   return (
     <>
-      <EditNotification Alert={Alert} />
+      {/* <EditNotification Alert={Alert} /> */}
 
       <AlertDelete
         loadingDelete={isLoading}

@@ -48,7 +48,7 @@ const {data:Alerts} = useGetAlertsQuery();
                 <TableCell className="font-medium ">{Alert.email}</TableCell>
                 <TableCell className="font-medium ">{Alert.title}</TableCell>
                 <TableCell className="font-medium ">{getMaxLength(Alert.message)}</TableCell>
-                <TableCell className="font-medium ">{Alert.isRead ? <Badge className="px-5 bg-secondary">Read</Badge> :<Badge className=" bg-red-800 px-5">Not Read</Badge>}</TableCell>
+                <TableCell className="font-medium ">{Alert.isRead ? <Badge className="px-5 bg-secondary">Read</Badge> :<Badge className=" bg-primary px-5">Not Read</Badge>}</TableCell>
 
                 <TableCell className="flex space-x-2 item-center justify-end ">
                   <AlertTableAction Alert={Alert} />

@@ -85,7 +85,15 @@ export const ManagerFarmApiSlice = createApi({
       }),
       invalidatesTags: ["ManagerFarm"],
     }),
+addCattleActivity:build.mutation<void,FormData>({
+  query:(body)=>({
+    url:'/CattleActivityIND/AddEvent',
+    method:"POST",
+    body,
+  }),
+      invalidatesTags: ["ManagerFarm"],
 
+}),
     //3- Update
 
     updateWork: build.mutation<void, { id: number; formData: FormData }>({
@@ -172,4 +180,5 @@ export const {
   useDeleteNotificationMutation,
   useGetAlertsWorkerQuery,
   useReadAlertMutation,
+  useAddCattleActivityMutation,
 } = ManagerFarmApiSlice;

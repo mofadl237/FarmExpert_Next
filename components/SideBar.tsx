@@ -83,17 +83,22 @@ export  function AppSidebar() {
       icon: Users,
     },
     {
-      title: "cattleActive",
-      url: `/en/dashboard/cattle-active`,
+      title: "Cattle",
+      url: `/en/dashboard/cattle`,
       icon: Cat,
     },
     {
-      title: "Products",
+      title: "Cattle Activity",
+      url: `/en/dashboard/cattle-activity`,
+      icon: Cat,
+    },
+    {
+      title: "Milk Production",
       url: `/en/dashboard/products`,
       icon: Boxes,
     },
     {
-      title: "Alerts",
+      title: "Notification",
       url: `/en/dashboard/alert`,
       icon: AlertTriangle,
     },
@@ -110,17 +115,22 @@ export  function AppSidebar() {
       icon: Home,
     },
     {
-      title: "cattleActive",
-      url: `/en/dashboard/cattle-active`,
+      title: "Cattle",
+      url: `/en/dashboard/cattle`,
       icon: Cat,
     },
     {
-      title: "Products",
+      title: "Cattle Activity",
+      url: `/en/dashboard/cattle-activity`,
+      icon: Cat,
+    },
+    {
+      title: "Milk Production",
       url: `/en/dashboard/products`,
       icon: Boxes,
     },
     {
-      title: "Alerts",
+      title: "Notification",
       url: `/en/dashboard/alert`,
       icon: AlertTriangle,
     },
@@ -131,7 +141,7 @@ export  function AppSidebar() {
     },
   ],
 };
-//[==]
+
  const sidebarItems = DataDashboard[role as keyof typeof DataDashboard] ?? [];
 //2- Handler
 const Logout =()=>{

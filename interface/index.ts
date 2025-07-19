@@ -130,3 +130,15 @@ export interface IAlert {
   isRead: boolean;
   createdAt: Date;
 }
+export interface IEvent {
+  EventType: string;
+  TagNumber: number;
+  Weight?: number;
+  Notes?: string;
+  Medicine?: string;
+  Dosage?: string;
+  WithdrawalTime?: string;
+  CalfGender?: string;
+  VaccineType?: string;
+  Date?: Date;
+}

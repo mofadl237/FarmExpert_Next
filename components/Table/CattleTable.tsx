@@ -9,16 +9,38 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+//PDF Library Install
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
+
+
 import { useGetCattleQuery } from "@/store/services/ManagerFarm";
 import CattleTableAction from "./CattleTableAction";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
 import { useState } from "react";
+import { Button } from '@/components/ui/button';
 
 export function CattleTable() {
   //1- state get Cattles From Api
   const [selectType, setSelectType] = useState("Cow");
   const { data: Cattels } = useGetCattleQuery({ typeCattle: selectType });
-  console.log(Cattels);
+  //2- Handler
+  const downloadPDF = ()=>{
+    const pdf = new jsPDF();
+    pdf.text("Cattle Report", 14, 10);
+    autoTable(pdf, {
+      startY: 20,
+      head: [["ID", "Type", "Gender", "Weight", "Age"]],
+      body: Cattels?.map((cattel) => [
+        cattel.cattleID ?? '',
+        cattel.type ?? '',
+        cattel.gender ?? '',
+        cattel.weight ?? '',
+        cattel.age ?? '',
+      ]) || [],
+    });
+    pdf.save('Cattles.pdf')
+  }
   return (
     <>
       <div>
@@ -73,6 +95,7 @@ export function CattleTable() {
           </TableRow>
         </TableFooter>
       </Table>
+      <Button className='bg-secondary w-full'  onClick={downloadPDF}>DOWNLOAD PDF</Button>
     </>
   );
 }
