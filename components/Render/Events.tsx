@@ -14,7 +14,7 @@ function Events() {
     {Events && Events.map((event)=>(
         // console.log("Event ====> ",event)
         // Add Class Color For Every Event 
-        <div key={event.id} className={`border-2 rounded-md p-4 space-y-3 ${event.eventType.split(" ")[0]}`}>
+        <div key={event.id} className={`border-2 rounded-md p-4 space-y-3 ${event.eventType.split(" ")[0]} flex flex-col justify-between`}>
             <h2>Event Type : {event.eventType}</h2>
             <h3>Tag Number : {event.tagNumber}</h3>
             {/* Valid For Every Event */}
