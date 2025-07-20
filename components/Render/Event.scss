@@ -1,0 +1,78 @@
+//**Dry Off
+$dryOffBg: rgba(228, 0, 0, 0.15);
+$dryOffColor: #888a9c;
+$dryOffBorder: rgba(140, 140, 160, 0.4);
+
+//**Treated
+$treatedBg: rgba(190, 255, 200, 0.2);
+$treatedColor: #4caf50;
+$treatedBorder: rgba(76, 175, 80, 0.4);
+
+//**Weighted
+$weightedBg: rgba(173, 216, 230, 0.2);
+$weightedColor: #00aaff;
+$weightedBorder: rgba(0, 170, 255, 0.4);
+
+//**Inseminated
+$inseminatedBg: rgba(204, 153, 255, 0.2);
+$inseminatedColor: #9b59b6;
+$inseminatedBorder: rgba(155, 89, 182, 0.3);
+
+//**Gives Birth
+$givesBirthBg: rgba(255, 192, 203, 0.25);
+$givesBirthColor: #e91e63;
+$givesBirthBorder: rgba(233, 30, 99, 0.3);
+
+//**Vaccinated
+$vaccinatedBg: rgba(173, 216, 230, 0.2);
+$vaccinatedColor: #6b21f3;
+$vaccinatedBorder: rgba(33, 236, 243, 0.3);
+
+//**Pregnant
+$pregnantBg: rgba(255, 255, 102, 0.2);
+$pregnantColor: #fbc02d;
+$pregnantBorder: rgba(251, 192, 45, 0.4);
+
+//**Aborted Pregnancy
+$abortedBg: rgba(255, 99, 71, 0.15);
+$abortedColor: #d32f2f;
+$abortedBorder: rgba(211, 47, 47, 0.3);
+
+//**Deworming
+$dewormingBg: rgba(210, 180, 140, 0.2);
+$dewormingColor: #8d6e63;
+$dewormingBorder: rgba(141, 110, 99, 0.3);
+
+//**Hoof Trimming
+$hoofBg: rgba(192, 192, 192, 0.2);
+$hoofColor: #607d8b;
+$hoofBorder: rgba(96, 125, 139, 0.3);
+//**Heed Sp
+$heedBg: rgba(153, 152, 158, 0.2);
+$heedColor: #8b608b;
+$heedBorder: rgba(96, 125, 139, 0.3);
+//**Tagging
+$taggingBg: rgba(152, 158, 153, 0.2);
+$taggingColor: #608b67;
+$taggingBorder: rgba(119, 139, 96, 0.3);
+
+@mixin EventStyle($name,$bgColor,$textColor,$borderColor){
+    .#{$name}{
+        background-color: $bgColor;
+        color:$textColor;
+        border-color: $borderColor;
+    }
+}
+//
+@include EventStyle('Dry', $dryOffBg, $dryOffColor, $dryOffBorder);
+@include EventStyle('Treated', $treatedBg, $treatedColor, $treatedBorder);
+@include EventStyle('Weighted', $weightedBg, $weightedColor, $weightedBorder);
+@include EventStyle('Tagging', $taggingBg, $taggingColor, $taggingBorder);
+@include EventStyle('Inseminated', $inseminatedBg, $inseminatedColor, $inseminatedBorder);
+@include EventStyle('Gives', $givesBirthBg, $givesBirthColor, $givesBirthBorder);
+@include EventStyle('Vaccinated', $vaccinatedBg, $vaccinatedColor, $vaccinatedBorder);
+@include EventStyle('Pregnant', $pregnantBg, $pregnantColor, $pregnantBorder);
+@include EventStyle('Aborted', $abortedBg, $abortedColor, $abortedBorder);
+@include EventStyle('Deworming', $dewormingBg, $dewormingColor, $dewormingBorder);
+@include EventStyle('Hoof', $hoofBg, $hoofColor, $hoofBorder);
+@include EventStyle('Heed', $heedBg, $heedColor, $heedBorder);
