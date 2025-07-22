@@ -1,7 +1,7 @@
 "use client";
 
 import {  useGetFarmsQuery } from "@/store/services/Farm";
-import FarmCard from "./FarmCard";
+import FarmCard from './../Card/FarmCard';
 
 const FarmRender = () => {
   const { isError, isLoading, data, error } = useGetFarmsQuery();

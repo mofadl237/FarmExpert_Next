@@ -1,5 +1,5 @@
-import ModelAddFarm from "@/components/ModelAddFarm"
-import { RequestTable } from "@/components/RequestTable"
+import ModelAddFarm from "@/components/Model/AddFarm"
+import { RequestTable } from "@/components/Table/RequestTable"
 
 const page = () => {
   return (

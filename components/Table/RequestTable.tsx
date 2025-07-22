@@ -10,7 +10,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { Badge } from "@/components/ui/badge"
-import RequestTableAction from "./RequestTableAction";
+import RequestTableAction from "../Action/RequestTableAction";
 import { useGetRequestsQuery } from "@/store/services/Request";
 
 

@@ -1,6 +1,6 @@
 
 import { useDeleteEventMutation } from "@/store/services/ManagerFarm";
-import AlertDelete from "../AlertDelete";
+import AlertDelete from "../Model/AlertDelete";
 import { IEvent } from "@/interface";
 import { EditEvent } from "../Model/EditEvent";
 

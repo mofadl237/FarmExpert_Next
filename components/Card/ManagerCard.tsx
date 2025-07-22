@@ -3,9 +3,10 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Mail, User, BadgeCheck, Home } from "lucide-react";
 import { IManager } from "@/interface";
-import ModelEditManager from "./ModelEditManager";
-import AlertDelete from "./AlertDelete";
+
 import { useDeleteManagerMutation } from "@/store/services/Manager";
+import ModelEditManager from "../Model/EditManager";
+import AlertDelete from "../Model/AlertDelete";
 
 interface IProps {
   manager: IManager;

@@ -4,8 +4,8 @@ import { User, Mail, Home,  Tag,  } from "lucide-react";
 import {
   useDeleteFarmMutation,
 } from "@/store/services/Farm";
-import AlertDelete from "./AlertDelete";
-import ModelEditFarm from "./ModelEditFarm";
+import AlertDelete from "../Model/AlertDelete";
+import ModelEditFarm from "../Model/EditFarm";
 
 interface IProps {
   farm: IFarm;

@@ -10,7 +10,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { useGetAlertsQuery } from "@/store/services/ManagerFarm";
-import AlertTableAction from "./AlertTableAction";
+import AlertTableAction from "../Action/AlertTableAction";
 import { getMaxLength } from "@/lib/utils";
 import { Badge } from "../ui/badge";
 // import { jwtDecode } from "jwt-decode";

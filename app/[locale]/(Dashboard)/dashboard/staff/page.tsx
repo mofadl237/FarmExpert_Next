@@ -1,5 +1,5 @@
-import ModelAddWork from "@/components/ModelAddWork"
-import RenderWork from "@/components/RenderWork"
+import ModelAddWork from "@/components/Model/AddWork"
+import RenderWork from "@/components/Render/RenderWork"
 
 const page = () => {
   return (

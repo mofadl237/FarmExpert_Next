@@ -1,6 +1,7 @@
 'use client'
 import { useGetManagersQuery } from "@/store/services/Manager"
-import ManagerCard from "./ManagerCard"
+import ManagerCard from './../Card/ManagerCard';
+
 
 const ManagerRender = () => {
     const {isLoading,isError,data}=useGetManagersQuery();

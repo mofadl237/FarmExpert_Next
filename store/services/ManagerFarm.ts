@@ -1,4 +1,4 @@
-import { IAlert, ICattle, IEvent, IMilk, ISendNotification, IWorker } from "@/interface";
+import { IAlert, ICattle, IMilk, IPaginatedEventResponse, ISendNotification, IWorker, PaginatedCattleResponse, PaginatedMilkResponse } from "@/interface";
 import { getToken } from "@/lib/utils";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
@@ -25,15 +25,17 @@ export const ManagerFarmApiSlice = createApi({
       }),
       providesTags: ["ManagerFarm"],
     }),
-    getCattle: build.query<ICattle[], { typeCattle: string }>({
-      query: ({ typeCattle }) => ({
-        url: `/Cattle/GetCattlesByType/${typeCattle}`,
-      }),
-      providesTags: ["ManagerFarm"],
-    }),
-    getMilk: build.query<IMilk[], void>({
-      query: () => ({
-        url: `/MilkProduction/All`,
+    //done
+    getCattle: build.query<PaginatedCattleResponse, { typeCattle: string, limit: number, sort: string, page: number }>({
+  query: ({ typeCattle, limit, sort, page }) => ({
+    url: `/Cattle/GetCattlesByType/${typeCattle}?pageSize=${limit}&sort=${sort}&page=${page}`,
+  }),
+  providesTags: ["ManagerFarm"],
+}),
+//done
+    getMilk: build.query<PaginatedMilkResponse, {limit:number,sort:string,page:number}>({
+      query: ({limit,sort,page}) => ({
+        url: `/MilkProduction/All?pageSize=${limit}&sort=${sort}&sortBy=total&page=${page}`,
       }),
       providesTags: ["ManagerFarm"],
     }),
@@ -50,9 +52,10 @@ export const ManagerFarmApiSlice = createApi({
       }),
       providesTags: ["ManagerFarm"],
     }),
-getEvents:build.query<IEvent[],void>({
-  query:()=>({
-    url:'/CattleActivityIND/AllEvents',
+    //done
+getEvents:build.query<IPaginatedEventResponse,{sort:string,limit:number,type:string,page:number}>({
+  query:({sort,limit,type,page})=>({
+    url: `/CattleActivityIND/AllEvents?sort=${sort}&pageSize=${limit}&eventType=${type}&page${page}`,
   }),
    providesTags: ["ManagerFarm"],
 }),

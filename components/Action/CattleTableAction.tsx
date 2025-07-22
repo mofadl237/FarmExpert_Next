@@ -4,7 +4,7 @@
 import { ICattle } from "@/interface";
 
 import { EditCattle } from "../Model/EditCattle";
-import AlertDelete from "../AlertDelete";
+import AlertDelete from "../Model/AlertDelete";
 import { useDeleteCattleMutation } from "@/store/services/ManagerFarm";
 interface IProps {
   cattel: ICattle;

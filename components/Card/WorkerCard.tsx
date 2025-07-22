@@ -3,9 +3,10 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { IWorker } from "@/interface";
 import Image from "next/image";
-import ModelEditWork from "./ModelEditWork";
-import AlertDelete from "./AlertDelete";
+
 import { useDeleteWorkMutation } from "@/store/services/ManagerFarm";
+import ModelEditWork from "../Model/EditWork";
+import AlertDelete from "../Model/AlertDelete";
 
 interface IProps {
   worker: IWorker;

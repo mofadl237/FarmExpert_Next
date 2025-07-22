@@ -1,5 +1,5 @@
-import FarmRender from "@/components/FarmRender";
-import ModelAddFarm from "@/components/ModelAddFarm";
+import ModelAddFarm from "@/components/Model/AddFarm";
+import FarmRender from "@/components/Render/FarmRender";
 // import ModelAddManager from "@/components/ModelAddManager";
 
 const page =  () => {

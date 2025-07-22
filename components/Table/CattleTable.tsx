@@ -13,45 +13,99 @@ import {
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 
-
 import { useGetCattleQuery } from "@/store/services/ManagerFarm";
-import CattleTableAction from "./CattleTableAction";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
+import CattleTableAction from "../Action/CattleTableAction";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
 import { useState } from "react";
-import { Button } from '@/components/ui/button';
+import { Button } from "@/components/ui/button";
+import Paginator from "../Paginator";
+import { SkeletonCattle } from "./SkeltonCattle";
 
 export function CattleTable() {
   //1- state get Cattles From Api
   const [selectType, setSelectType] = useState("Cow");
-  const { data: Cattels } = useGetCattleQuery({ typeCattle: selectType });
-  const { data: Cow } = useGetCattleQuery({ typeCattle: "Cow" });
-  const { data: Buffalo } = useGetCattleQuery({ typeCattle: "Buffalo" });
-  const { data: Sheep } = useGetCattleQuery({ typeCattle: "Sheep" });
-const AlllCattels = [
-  ...(Cow || []),
-  ...(Buffalo || []),
-  ...(Sheep || []),
-];
+  const [selectSort, setSelectSort] = useState("asc");
+  const [selectLimit, setSelectLimit] = useState("3");
+  const [currentPage, setCurrenPage] = useState(1);
+
+  const { data: cattelsResponse, isLoading } = useGetCattleQuery({
+  typeCattle: selectType,
+  sort: selectSort,
+  limit: parseInt(selectLimit),
+  page:currentPage,
+});
+const { data: Cattels = [] } = cattelsResponse || {};
+
+const { data: cowResponse } = useGetCattleQuery({
+  typeCattle: "Cow",
+  sort: selectSort,
+  limit: parseInt(selectLimit),
+  page:currentPage,
+
+});
+const { data: Cow = [] } = cowResponse || {};
+
+const { data: buffaloResponse } = useGetCattleQuery({
+  typeCattle: "Buffalo",
+  sort: selectSort,
+  limit: parseInt(selectLimit),
+  page:currentPage,
+});
+const { data: Buffalo = [] } = buffaloResponse || {};
+
+const { data: sheepResponse } = useGetCattleQuery({
+  typeCattle: "Sheep",
+  sort: selectSort,
+  limit: parseInt(selectLimit),
+  page:currentPage,
+});
+const { data: Sheep = [] } = sheepResponse || {};
+
+   const AlllCattels = [...(Cow || []), ...(Buffalo || []), ...(Sheep || [])];
   //2- Handler
-  const downloadPDF = ()=>{
+  const onClickNext = () => {
+    setCurrenPage((prev) => prev + 1);
+  };
+  const onClickPrev = () => {
+    setCurrenPage((prev) => prev - 1);
+  };
+
+  const downloadPDF = () => {
     const pdf = new jsPDF();
     pdf.text("Cattle Report", 14, 10);
     autoTable(pdf, {
       startY: 20,
       head: [["ID", "Type", "Gender", "Weight", "Age"]],
-      body: AlllCattels?.map((cattel) => [
-        cattel.cattleID ?? '',
-        cattel.type ?? '',
-        cattel.gender ?? '',
-        cattel.weight ?? '',
-        cattel.age ?? '',
-      ]) || [],
+      body:
+        AlllCattels?.map((cattel) => [
+          cattel.cattleID ?? "",
+          cattel.type ?? "",
+          cattel.gender ?? "",
+          cattel.weight ?? "",
+          cattel.age ?? "",
+        ]) || [],
     });
-    pdf.save('Cattles.pdf')
-  }
+    pdf.save("Cattles.pdf");
+  };
+ if (isLoading ) {
   return (
     <>
-      <div>
+      {Array.from({ length: 10 }).map((_, i) => (
+        <SkeletonCattle key={i} />
+      ))}
+    </>
+  );
+}
+
+  return (
+    <>
+      <div className="flex justify-between items-center">
         <Select
           value={selectType}
           onValueChange={(value) => setSelectType(value)}
@@ -65,6 +119,38 @@ const AlllCattels = [
             <SelectItem value="Buffalo">Buffalo</SelectItem>
           </SelectContent>
         </Select>
+        {/* Select Sort */}
+        <Select
+          value={selectSort}
+          onValueChange={(value) => setSelectSort(value)}
+        >
+          <SelectTrigger className="w-[200px]">
+            <SelectValue placeholder="Select Sort" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="asc">ASC</SelectItem>
+            <SelectItem value="desc">DESC</SelectItem>
+          </SelectContent>
+        </Select>
+        {/* Select Limit */}
+        <Select
+          value={selectLimit}
+          onValueChange={(value) => setSelectLimit(value)}
+        >
+          <SelectTrigger className="w-[200px]">
+            <SelectValue placeholder="Select Limit" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="3">3</SelectItem>
+            <SelectItem value="5">5</SelectItem>
+            <SelectItem value="10">10</SelectItem>
+            <SelectItem value="15">15</SelectItem>
+          </SelectContent>
+        </Select>
+
+        <Button className="bg-secondary" onClick={downloadPDF}>
+          DOWNLOAD PDF
+        </Button>
       </div>
       <Table>
         <TableCaption>Cattle </TableCaption>
@@ -98,12 +184,19 @@ const AlllCattels = [
           <TableRow>
             <TableCell colSpan={5}>Total</TableCell>
             <TableCell className="text-right">
-              {Cattels?.length ? Cattels.length : "you Do nt Any Todo Yet !!"}
+              {Cattels?.length ? Cattels.length : "you Do nt Any Cattle Yet !!"}
             </TableCell>
           </TableRow>
         </TableFooter>
       </Table>
-      <Button className='bg-secondary w-full'  onClick={downloadPDF}>DOWNLOAD PDF</Button>
+      <Paginator
+        total={cattelsResponse?.totalCount ?? 1}
+        pageCount={cattelsResponse?.totalPages || 1}
+        isLoading={isLoading}
+        page={currentPage}
+        onClickPrev={onClickPrev}
+        onClickNext={onClickNext}
+      />
     </>
   );
 }

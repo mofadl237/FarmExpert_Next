@@ -19,12 +19,15 @@ const RenderDashboard = () => {
   // const { data: Farms } = useGetFarmsQuery();
   // const { data: managers } = useGetManagersQuery();
   // const { data: Requests } = useGetRequestsQuery();
-  const { data: Cows } = useGetCattleQuery({ typeCattle: "Cow" });
-  const { data: Buffalo } = useGetCattleQuery({ typeCattle: "Buffalo" });
-  const { data: Sheep } = useGetCattleQuery({ typeCattle: "Sheep" });
+  const { data: CowsResponse } = useGetCattleQuery({ typeCattle: "Cow",sort:'asc',limit:0,page: 0});
+  const { data: BuffaloResponse } = useGetCattleQuery({ typeCattle: "Buffalo",sort:'asc',limit:0,page: 0 });
+  const { data: SheepResponse } = useGetCattleQuery({ typeCattle: "Sheep" ,sort:'asc',limit:0,page: 0});
   // const { data: Staff } = useGetWorkerQuery();
-  const { data: Milk } = useGetMilkQuery();
-  //
+  const { data: MilkResponse } = useGetMilkQuery({sort:'asc',limit:0,page: 0});
+  const {data:Milk = []}=MilkResponse ||{};
+  const {data:Cows =[]} = CowsResponse || {};
+  const {data:Buffalo =[]} = BuffaloResponse || {};
+  const {data:Sheep =[]} = SheepResponse || {};
   const chartDataMilk = Milk?.map((item) => ({
     date: new Date(item.date!).toLocaleDateString(),
     total: item.total ?? 0,

@@ -1,10 +1,11 @@
 "use client";
 
 import { useGetWorkerQuery } from "@/store/services/ManagerFarm";
-import WorkerCard from "./WorkerCard";
+import WorkerCard from "../Card/WorkerCard";
+import SkeltonWorker from "../Skelton/SkeltonWorker";
 
 const RenderWork = () => {
-  const { isError, isLoading, data, error } = useGetWorkerQuery();
+  const { isError, data, error ,isLoading} = useGetWorkerQuery();
     // const [ deleteFarm ]=useDeleteFarmMutation();
 
 
@@ -16,7 +17,14 @@ const RenderWork = () => {
       </div>
     );
   }
-  if (isLoading) return <h1>Loading .....</h1>;
+  if(  isLoading) {
+    return (
+      <div className="grid gap-4 grid-cols-[repeat(auto-fit,(minmax(250px,1fr)))]">
+      {Array.from({length:3}).map((_,i)=>(
+        <SkeltonWorker key ={i}/>
+      ))}
+      </div>
+  )}
   return (
     <div className="  grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-6">
       {

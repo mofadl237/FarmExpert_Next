@@ -143,3 +143,25 @@ export interface IEvent {
   vaccineType?: string;
   date?: Date;
 }
+
+export interface PaginatedCattleResponse {
+  currentPage: number;
+  pageSize: number;
+  totalPages: number;
+  totalCount: number;
+  data: ICattle[];
+}
+export interface PaginatedMilkResponse {
+  currentPage: number;
+  pageSize: number;
+  totalPages: number;
+  totalCount: number;
+  data: IMilk[];
+}
+export interface IPaginatedEventResponse {
+  currentPage: number;
+  pageSize: number;
+  totalPages: number;
+  totalCount: number;
+  data: IEvent[];
+}

@@ -1,11 +1,11 @@
-import { AnimatedHeader } from "@/components/AnimatedHeader";
-import { AnimatedSection } from "@/components/AnimatedSection";
+import { AnimatedHeader } from "@/components/Animation/AnimatedHeader";
+import { AnimatedSection } from "@/components/Animation/AnimatedSection";
 import Navbar from "@/components/Nav";
 import { useTranslations } from "next-intl";
-import AnimatedImage from "@/components/AnimatedImage";
-import { FeatureBox } from "@/components/FeatureBox";
+import AnimatedImage from "@/components/Animation/AnimatedImage";
+import { FeatureBox } from "@/components/Card/FeatureBox";
 import { Activity, FileText, Stethoscope, Store } from "lucide-react";
-import ProductBox from "@/components/ProductBox";
+import ProductBox from "@/components/Animation/ProductBox";
 import ContactUs from "@/components/ContactUs";
 import Footer from "@/components/FooterComponent";
 

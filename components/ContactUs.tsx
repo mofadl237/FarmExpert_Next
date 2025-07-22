@@ -1,6 +1,6 @@
 'use client'
 import { useTranslations } from "next-intl";
-import { AnimatedHeader } from "./AnimatedHeader"
+import { AnimatedHeader } from "./Animation/AnimatedHeader"
 import { usePathname } from "next/navigation";
 import { ContactForm } from "./FormContact";
 

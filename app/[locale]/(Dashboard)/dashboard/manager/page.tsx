@@ -1,5 +1,5 @@
-import ManagerRender from "@/components/ManagerRender";
-import ModelAddManager from "@/components/ModelAddManager";
+import ManagerRender from "@/components/Render/ManagerRender";
+import ModelAddManager from "@/components/Model/AddManager";
 
 const page = () => {
   return (

@@ -5,7 +5,7 @@ import { IAlert, IErrorResponse } from "@/interface";
 
 import { toast } from "sonner";
 
-import AlertDelete from "../AlertDelete";
+import AlertDelete from "../Model/AlertDelete";
 import { useDeleteNotificationMutation } from "@/store/services/ManagerFarm";
 interface IProps {
   Alert: IAlert;

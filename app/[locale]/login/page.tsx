@@ -1,4 +1,4 @@
-import { AnimatedHeader } from "@/components/AnimatedHeader";
+import { AnimatedHeader } from "@/components/Animation/AnimatedHeader";
 import { LoginForm } from '@/components/FarmLogin';
 import Navbar from "@/components/Nav";
 

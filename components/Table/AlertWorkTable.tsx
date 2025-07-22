@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/table";
 import {useGetAlertsWorkerQuery } from "@/store/services/ManagerFarm";
 import { getMaxLength, getToken } from "@/lib/utils";
-import AlertWorkerTableAction from "./AlertWorkerTableAction";
+import AlertWorkerTableAction from "../Action/AlertWorkerTableAction";
 import { jwtDecode } from "jwt-decode";
 import { IJwtPayload } from "@/interface";
 export function AlertWorkTable() {
