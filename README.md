@@ -10,7 +10,7 @@ This project is a **complete farm management dashboard** that allows for full co
 
 ## Modified the project to match the requirements of the eyego.ai task
 
-### Live Demo https://farm-expert-next.vercel.app/en/dashboard
+
 
 ## 🚀 Try the Dashboard
 
@@ -23,6 +23,8 @@ You can try the system using one of the demo accounts below:
 | Staff Worker  | `W5@gmail.com`    | `1234512345` |
 
 > 📝 Each account has a different access level and experience tailored to their role.
+
+### Live Demo https://farm-expert-next.vercel.app/en/dashboard
 
 ---
 ## Admin Dashboard 
