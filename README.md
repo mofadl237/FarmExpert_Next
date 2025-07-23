@@ -10,6 +10,8 @@ This project is a **complete farm management dashboard** that allows for full co
 
 ## Modified the project to match the requirements of the eyego.ai task
 
+### Live Demo https://farm-expert-next.vercel.app/en/dashboard
+
 ## 🚀 Try the Dashboard
 
 You can try the system using one of the demo accounts below:
