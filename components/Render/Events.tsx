@@ -23,7 +23,7 @@ function Events() {
     sort: selectSort,
     limit: parseInt(selectLimit),
     type: selectType,
-    page:1
+    page:currentPage,
   });
   //2- Handler
  const onClickNext = () => {
@@ -87,8 +87,8 @@ const {data:Events = []} = EventsResponse || {}
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="3">3</SelectItem>
-            <SelectItem value="5">5</SelectItem>
-            <SelectItem value="10">10</SelectItem>
+            <SelectItem value="6">6</SelectItem>
+            <SelectItem value="9">9</SelectItem>
           </SelectContent>
         </Select>
       </div>

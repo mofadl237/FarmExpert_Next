@@ -54,8 +54,8 @@ export const ManagerFarmApiSlice = createApi({
     }),
     //done
 getEvents:build.query<IPaginatedEventResponse,{sort:string,limit:number,type:string,page:number}>({
-  query:({sort,limit,type,page})=>({
-    url: `/CattleActivityIND/AllEvents?sort=${sort}&pageSize=${limit}&eventType=${type}&page${page}`,
+  query:({sort,type,limit,page})=>({
+    url: `/CattleActivityIND/AllEvents?sort=${sort}&&page=${page}&pageSize=${limit}&eventType=${type}`,
   }),
    providesTags: ["ManagerFarm"],
 }),

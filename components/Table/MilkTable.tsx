@@ -145,7 +145,7 @@ export function MilkTable() {
           <TableRow>
             <TableCell colSpan={6}>Total Cows Milked</TableCell>
             <TableCell className="text-right">
-              {milks?.length ? milks.length : "you Do'nt Any Milk Yet !!"}
+              {milks?.length ? milksResponse?.totalCount : "you Do'nt Any Milk Yet !!"}
             </TableCell>
           </TableRow>
         </TableFooter>
