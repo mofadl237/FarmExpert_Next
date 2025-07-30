@@ -5,9 +5,7 @@ const nextConfig: NextConfig = {
     images: {
     domains: ['farmxpertapi.runasp.net'], 
   },
-  typescript: {
-    ignoreBuildErrors: true,
-  },
+ 
 };
  
 const withNextIntl = createNextIntlPlugin();
