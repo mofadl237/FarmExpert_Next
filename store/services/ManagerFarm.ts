@@ -1,4 +1,4 @@
-import { IAlert, ICattle, IMilk, IPaginatedEventResponse, ISendNotification, IWorker, PaginatedCattleResponse, PaginatedMilkResponse } from "@/interface";
+import { IAlert, ICattle, ICattleAddSuccess, IMilk, IPaginatedEventResponse, ISendNotification, IWorker, PaginatedCattleResponse, PaginatedMilkResponse } from "@/interface";
 import { getToken } from "@/lib/utils";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
@@ -72,6 +72,14 @@ getEvents:build.query<IPaginatedEventResponse,{sort:string,limit:number,type:str
     addCattle: build.mutation<void, FormData>({
       query: (formData) => ({
         url: "/Cattle/AddCattle",
+        method: "Post",
+        body: formData,
+      }),
+      invalidatesTags: ["ManagerFarm"],
+    }),
+    addCattleECommerce: build.mutation<ICattleAddSuccess, FormData>({
+      query: (formData) => ({
+        url: "/v2/Products/AddCattle",
         method: "Post",
         body: formData,
       }),
@@ -208,4 +216,5 @@ export const {
   useGetEventsQuery,
   useDeleteEventMutation,
   useUpdateEventMutation,
+  useAddCattleECommerceMutation
 } = ManagerFarmApiSlice;

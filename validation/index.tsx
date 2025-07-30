@@ -137,3 +137,8 @@ export const EventSchema = z.object({
   }).optional(),
 });
 
+export const CattleECommerceSchema = z.object({
+ 
+  price: z.string({ message: "Price must be a positive number" }),
+  imageUrl: z.instanceof(File, { message: "Image is required" }),
+});

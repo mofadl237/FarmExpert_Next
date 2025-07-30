@@ -107,8 +107,8 @@ const AddMilk = () => {
                     <Input
                     min={0}
                       type="number"
-                      value={field.value }
-                      onChange={(e) => field.onChange(Number(e.target.value))}
+                      {...field}
+                      onChange={(e) => field.onChange(e.target.valueAsNumber)}
                     />
                   </FormControl>
                   <FormMessage />
@@ -126,8 +126,8 @@ const AddMilk = () => {
                     <Input
                     min={0}
                       type="number"
-                      value={field.value }
-                      onChange={(e) => field.onChange(Number(e.target.value))}
+                      {...field}
+                      onChange={(e) => field.onChange(e.target.valueAsNumber)}
                     />
                   </FormControl>
                   <FormMessage />

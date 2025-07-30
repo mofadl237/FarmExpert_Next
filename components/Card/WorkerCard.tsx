@@ -53,7 +53,7 @@ export default function WorkerCard({ worker }: IProps) {
           height={100}
           className="w-28 h-28  rounded-full border border-gray-300 shadow-md bg-center"
         />
-        <CardTitle className="mt-4 text-xl font-bold">{displayName}</CardTitle>
+        <CardTitle className="mt-4 text-xl font-bold line-clamp-1">{displayName}</CardTitle>
         <p className="text-muted-foreground text-sm">{displaySpecialty}</p>
       </CardHeader>
 

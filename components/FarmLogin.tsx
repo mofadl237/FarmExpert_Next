@@ -42,13 +42,12 @@ export function LoginForm() {
        SetLocal(res.token);
       toast.success("Login Post successfully , Redirect Dashboard.");
       form.reset();
-        router.push("/en/dashboard");
+      router.push("/en/dashboard");
     } catch (error: unknown) {
         
       const errorMessage =
         (error as { data?: { message?: string } })?.data?.message ||
         "Error Login Dashboard.";
-
       toast.error(errorMessage);
     }
   }

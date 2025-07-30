@@ -46,6 +46,17 @@
   },
   "contact":{
     "title":"start Contact us"
+  },
+  "ECommerce":{
+    "login":"LogIn",
+    "register":"Register",
+    "cattle":"Cattles",
+    "milk":"Milks",
+    "productsCattle":"Our Latest Products Cattle",
+    "cattleName":"Title : ",
+    "CattleCategory":"Category : ",
+    "cattlePrice":"Price : ",
+    "farmName":"Farm Name : "
   }
 
 }

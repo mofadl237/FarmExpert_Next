@@ -5,21 +5,24 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu } from "lucide-react";
+import {  Menu, ShoppingCart } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-const links = [
-  // { path: "vet", label: "Vet" },
-  { path: "e-commerce", label: "E-commerce" },
-  { path: "dashboard", label: "Dashboard" },
-];
 
-export default function Navbar() {
-  //1-State
-  const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  const locale = useLocale();
-
+export default function NavECommerce() {
+    //1-State
+    const [open, setOpen] = useState(false);
+    const [scrolled, setScrolled] = useState(false);
+    const locale = useLocale();
+    const t = useTranslations("");
+    const links = [
+      // { path: "vet", label: "Vet" },
+      { path: "milks", label: t("ECommerce.milk") },
+      { path: "cattles", label: t("ECommerce.cattle") },
+      { path: "login", label: t("ECommerce.login") },
+      { path: "register", label: t("ECommerce.register") },
+      { path: "cart", label: <ShoppingCart/> },
+    ];
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 50) {
@@ -116,7 +119,7 @@ export default function Navbar() {
 import { usePathname } from "next/navigation";
 import { ModeToggle } from "./DarkMode";
 import { LanguageSwitcher } from "./LanguageSwitch";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 type NavLinkProps = React.ComponentProps<typeof Link> & {
   children: React.ReactNode;
 };

@@ -260,8 +260,8 @@ formData.append("image", selectedFile);
           onChange={(e) => {
             const file = e.target.files?.[0];
             if (file) {
-              field.onChange(file); // ✅ تحديث قيمة الفورم
-              setSelectedFile(file); // ✅ إرسال الملف في FormData
+              field.onChange(file); 
+              setSelectedFile(file); 
             }
           }}
         />

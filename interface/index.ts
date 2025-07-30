@@ -165,3 +165,28 @@ export interface IPaginatedEventResponse {
   totalCount: number;
   data: IEvent[];
 }
+
+
+export interface ICattleECommerce{
+  productID?:number;
+  name:string;
+  description:string;
+  price:number;
+  imageUrl:string;
+  farmName:string;
+  type:string;
+  age:number;
+}
+export interface ICattleECommerceResponse {
+  currentPage:number;
+  pageSize:number;
+  totalPages:number;
+  totalCount:number;
+  data:ICattleECommerce[];
+}
+export interface ICattleAddSuccess{
+  
+    message:string;
+    productID:number
+  
+}

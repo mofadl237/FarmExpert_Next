@@ -29,7 +29,7 @@ const RenderAlert = () => {
       <div className="w-full space-y-4 ">
         <SendNotification />
         {/* bg-gradient-to-r from-green-300 via-green-500 to-emerald-600 bg-clip-text text-transparent */}
-        <h1 className="text-center text-transparent bg-gradient-to-l from-[#00e676]  to-[#2979ff] bg-clip-text">
+        <h1 className="text-center ">
           I Manager For Send && Delete && Edit Alert {role} - {email} FarmerId -{" "}
           {FarmId}
         </h1>

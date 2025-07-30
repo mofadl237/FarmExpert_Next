@@ -6,6 +6,7 @@ import { ICattle } from "@/interface";
 import { EditCattle } from "../Model/EditCattle";
 import AlertDelete from "../Model/AlertDelete";
 import { useDeleteCattleMutation } from "@/store/services/ManagerFarm";
+import { AddCattleProduct } from "../Model/AddCattleProduct";
 interface IProps {
   cattel: ICattle;
 }
@@ -20,6 +21,7 @@ const CattleTableAction = ({ cattel }: IProps) => {
   }
   return (
     <>
+    <AddCattleProduct cattle={cattel}/>
       <EditCattle cattle={cattel} />
       <AlertDelete
         loadingDelete={isLoading}

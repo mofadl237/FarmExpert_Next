@@ -45,5 +45,16 @@
   },
   "contact":{
     "title":"تواصل معنا"
+  },
+  "ECommerce":{
+    "login":"تسجيل الدخول",
+    "register":"حساب جديد",
+     "cattle":"الحيوانات",
+    "milk":"الألبان",
+    "productsCattle":"منتجاتنا من الحيوانات",
+    "cattleName":"العنوان : ",
+    "CattleCategory":"الصنف : ",
+    "cattlePrice":"السعر : ",
+    "farmName":"اسم المزرعه : "
   }
 }
