@@ -1,16 +1,16 @@
+'use client'
+
 import { useGetCattleECommerceByIDQuery } from "@/store/services/ECommerce"
 
-
-interface IProps{
-    id:number;
+interface IProps {
+  id: number
 }
 
-const ProductDetails = ({id}:IProps) => {
-    const {data:cattle}=useGetCattleECommerceByIDQuery({id})
+const ProductDetails = ({ id }: IProps) => {
+  const { data: cattle } = useGetCattleECommerceByIDQuery({id})
 
   return (
     <div>
-      Details - {id}
       <h2>{cattle?.description}</h2>
       <h2>{cattle?.farmName}</h2>
     </div>

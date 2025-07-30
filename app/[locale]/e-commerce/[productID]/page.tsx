@@ -1,14 +1,15 @@
 'use client'
 
-import ProductDetails from "@/components/Render/ProductDetails"
+import { useGetCattleECommerceByIDQuery } from "@/store/services/ECommerce"
 
-
-const page = ({params}:{params:{productID:string}}) => {
+const Page = ({params}:{params:{productID:string}}) => {
+const {data:cattle}=useGetCattleECommerceByIDQuery({id:Number(params.productID)})
   return (
     <div>
-        <ProductDetails id={Number(params.productID)} />
+        <h1>{cattle?.description}</h1>
+        <h1>{cattle?.farmName}</h1>
     </div>
   )
 }
 
-export default page
+export default Page
