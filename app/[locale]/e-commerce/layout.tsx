@@ -34,25 +34,9 @@ export const metadata: Metadata = {
     "Farm Expert",
   ],
   icons: {
-    icon: "/logo.png", // Make sure this icon exists in the public folder
+    icon: "/logo.png", 
   },
-  // openGraph: {
-  //   title: "Farm Expert – Smart Livestock & Farm Management",
-  //   description:
-  //     "Manage your entire farm operation from one place. Add, track, and sell animals through a simple and secure platform.",
-  //   url: "https://yourfarmdomain.com", // Replace with your actual domain
-  //   siteName: "Farm Expert",
-  //   images: [
-  //     {
-  //       url: "/logo-og.png", // Recommended size: 1200x630 px, must be in public folder
-  //       width: 1200,
-  //       height: 630,
-  //       alt: "Farm Expert Open Graph Image",
-  //     },
-  //   ],
-  //   locale: "en_US",
-  //   type: "website",
-  // },
+ 
 };
 
 
@@ -75,16 +59,12 @@ export default async function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <ReduxProvider>
-
-        
         <NextIntlClientProvider>
         <ThemeProvider
           attribute={"class"}
           defaultTheme={"dark"}
           enableSystem={true}
         >
-
-          
           <main className="container mx-auto px-5">
            
           {children}

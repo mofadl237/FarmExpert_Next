@@ -63,8 +63,10 @@ if (!selectedFile) {
 }
 formData.append("imageFile", selectedFile);
    
-       await addCattleECommerce(formData);
-       toast.success(details?.message +" - "+ details?.productID );
+       await addCattleECommerce(formData).unwrap();
+      
+toast.success(
+  (details?.message || 'Add Success Store') + " - " + (details?.productID || ""));
     } catch (error: unknown) {
       const message =
         (error as IErrorResponse)?.data?.message ||
