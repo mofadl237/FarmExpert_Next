@@ -12,6 +12,7 @@ import { AnimatedHeader } from "../Animation/AnimatedHeader";
 import { AnimatedSection } from "../Animation/AnimatedSection";
 import RenderCattleProducts from "../ECommerce/RenderCattleProducts";
 import SkeltonProduct from "../Skelton/SkeltonProduct";
+import { Car } from "lucide-react";
 
 interface IProps {
   id: number;
@@ -19,7 +20,7 @@ interface IProps {
 
 const ProductDetails = ({ id }: IProps) => {
   const { data: cattle } = useGetCattleECommerceByIDQuery({ id });
-  const [imgSrc, setImgSrc] = useState("/main-2.jpg");
+  const [imgSrc, setImgSrc] = useState("/Cow2.jpg");
   const { data: cattlesType, isLoading } = useGetCattleECommerceByTypeQuery({
     type:String(cattle?.type),
   });
@@ -39,23 +40,25 @@ const ProductDetails = ({ id }: IProps) => {
       >
         Back
       </Link>
-      <div className=" flex gap-6 ">
+      <div className=" flex flex-col md:flex-row gap-6  ">
         <Image
           src={imgSrc}
           alt={`Image Description  ${id}`}
           width={400}
           height={200}
-          className="object-cover rounded-t-lg aspect-[3/2]"
-          onError={() => setImgSrc("/main-2.jpg")}
+          className="object-cover  rounded-t-lg aspect-[3/2]"
+          onError={() => setImgSrc("/Cow1.jpg")}
         />
 
-        <div className=" space-y-8 w-full">
-          <h2>Cattle Description : {cattle?.description}</h2>
-          <h2>Farm Nam : {cattle?.farmName}</h2>
-          <h2>Cattle Age : {cattle?.age}</h2>
-          <h2>Cattle Price : {cattle?.price}</h2>
-          <h2>Cattle Type : {cattle?.type}</h2>
-          <Button className="w-full">Add To Cart</Button>
+        <div className=" space-y-3 md:space-y-8 w-full">
+          <h2>Cattle Description : <span className="text-gray-400">{cattle?.description}</span></h2>
+          <h2>Farm Nam : <span className="text-gray-400">{cattle?.farmName}</span></h2>
+          <h2>Cattle Age : <span className="text-gray-400">{cattle?.age}</span></h2>
+          <h2>Cattle Type :  <span className="text-gray-400">{cattle?.type}</span></h2>
+<h2 className="text-4xl text-secondary font-extrabold">
+  {cattle?.price?.toLocaleString("en-US")} EGP
+</h2>
+          <Button className="w-full"><Car/> Add To Cart</Button>
         </div>
       </div>
       <AnimatedHeader title="Similar Products" center />

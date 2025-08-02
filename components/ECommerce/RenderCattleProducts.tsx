@@ -19,7 +19,7 @@ const RenderCattleProducts = ( {cattle}:IProps) => {
   return (
     <div className="w-full "> 
       <Link href={`/en/e-commerce/${cattle.productID}`}>
-      <Image src={imgSrc} alt='Products' width={300} height={200} className="object-cover rounded-t-lg aspect-[3/2]"  onError={()=>setImgSrc('/main-2.jpg')}/>
+      <Image src={imgSrc} alt='Products' width={300} height={200} className="object-cover w-full rounded-t-lg aspect-[3/2]"  onError={()=>setImgSrc('/Cow2.jpg')}/>
       <div className="px-2 py-2 bg-secondary">
 
         <h2 className='flex gap-2 items-center'>
