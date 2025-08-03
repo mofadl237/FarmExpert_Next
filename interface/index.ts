@@ -32,9 +32,7 @@ export interface IErrorResponse {
   };
 }
 export interface IErrorResponseMessage {
-  
-    message: string;
-
+  message: string;
 }
 export interface IRequest {
   id: number;
@@ -131,7 +129,7 @@ export interface IAlert {
   createdAt: Date;
 }
 export interface IEvent {
-  id?:number;
+  id?: number;
   eventType: string;
   tagNumber: number;
   weight?: number;
@@ -166,27 +164,46 @@ export interface IPaginatedEventResponse {
   data: IEvent[];
 }
 
-
-export interface ICattleECommerce{
-  productID?:number;
-  name:string;
-  description:string;
-  price:number;
-  imageUrl:string;
-  farmName:string;
-  type:string;
-  age:number;
+export interface ICattleECommerce {
+  productID?: number;
+  name: string;
+  description: string;
+  price: number;
+  imageUrl: string;
+  farmName: string;
+  type: string;
+  age: number;
 }
 export interface ICattleECommerceResponse {
-  currentPage:number;
-  pageSize:number;
-  totalPages:number;
-  totalCount:number;
-  data:ICattleECommerce[];
+  currentPage: number;
+  pageSize: number;
+  totalPages: number;
+  totalCount: number;
+  data: ICattleECommerce[];
 }
-export interface ICattleAddSuccess{
-  
-    message:string;
-    productID:number
-  
+export interface IMilkECommerce {
+  milkProductID?: number;
+  pricePerKg: number;
+  totalQuantity: number;
+  soldQuantity: number;
+  remaining: number;
+  farmName: string;
+  productionDate: Date;
+  notes: string;
+}
+export interface IMilkECommerceResponse {
+  currentPage: number;
+  pageSize: number;
+  totalPages: number;
+  totalCount: number;
+  data: IMilkECommerce[];
+}
+export interface ICattleAddSuccess {
+  message: string;
+  productID: number;
+}
+
+export interface IAddMilkECommerce {
+  milkProductionID: number;
+  pricePerKg: number;
 }

@@ -1,4 +1,4 @@
-import { ICattleECommerce, ICattleECommerceResponse } from "@/interface";
+import { ICattleECommerce, ICattleECommerceResponse, IMilkECommerceResponse } from "@/interface";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const ECommerceApi = createApi({
@@ -8,9 +8,9 @@ export const ECommerceApi = createApi({
     baseUrl: "https://farmxpertapi.runasp.net/api/v2",
   }),
   endpoints: (build) => ({
-    getCattleECommerce: build.query<ICattleECommerceResponse, void>({
-      query: () => ({
-        url: "/Products/AllCattle?page=1&pageSize=8&sort=desc",
+    getCattleECommerce: build.query<ICattleECommerceResponse, {page:number , limit:number}>({
+      query: ({page,limit}) => ({
+        url: `/Products/AllCattle?page=${page}&pageSize=${limit}&sort=desc`,
       }),
       providesTags: ["ECommerce"],
     }),
@@ -29,6 +29,14 @@ export const ECommerceApi = createApi({
       }),
       providesTags: ["ECommerce"],
     }),
+    getMilkECommerce:build.query<IMilkECommerceResponse  , {page:number,limit:number}>({
+      query:({page,limit})=>({
+        url:`/MilkStore/AllMilk?page=${page}&pageSize=${limit}`
+      }),
+      providesTags: ["ECommerce"],
+    }),
+
+    
   }),
 });
 
@@ -36,6 +44,7 @@ export default ECommerceApi.reducer;
 export const { useGetCattleECommerceQuery,
      useGetCattleECommerceByIDQuery ,
      useGetCattleECommerceByTypeQuery,
+     useGetMilkECommerceQuery,
 
 } =
   ECommerceApi;

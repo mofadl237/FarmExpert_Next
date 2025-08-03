@@ -5,6 +5,7 @@ import { IMilk } from "@/interface";
 import EditMilk from "../Model/EditMilk";
 import AlertDelete from "../Model/AlertDelete";
 import { useDeleteMilkMutation } from "@/store/services/ManagerFarm";
+import AddMilkProduct from "../Model/AddMilkProduct";
 interface IProps {
   milk: IMilk;
 }
@@ -19,6 +20,7 @@ const MilkTableAction = ({ milk }: IProps) => {
   };
   return (
     <>
+    <AddMilkProduct milk={milk}/>
       <EditMilk milk={milk} />
 
       <AlertDelete

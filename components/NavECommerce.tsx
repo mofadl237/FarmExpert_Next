@@ -17,15 +17,15 @@ export default function NavECommerce() {
     const t = useTranslations("");
     const links = [
       // { path: "vet", label: "Vet" },
-      { path: "milks", label: t("ECommerce.milk") },
-      { path: "cattles", label: t("ECommerce.cattle") },
-      { path: "login", label: t("ECommerce.login") },
-      { path: "register", label: t("ECommerce.register") },
-      { path: "cart", label: <ShoppingCart/> },
+      { path: "e-commerce/milk", label: t("ECommerce.milk") },
+      { path: "e-commerce/cattle", label: t("ECommerce.cattle") },
+      { path: "e-commerce/login", label: t("ECommerce.login") },
+      { path: "e-commerce/register", label: t("ECommerce.register") },
+      { path: "e-commerce/cart", label: <ShoppingCart/> },
     ];
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 50) {
+      if (window.scrollY > 1) {
         setScrolled(true);
       } else {
         setScrolled(false);
@@ -47,7 +47,7 @@ export default function NavECommerce() {
     >
       <nav className="container mx-auto flex items-center justify-between px-4 py-3 py-3shadow-sm">
         {/* Logo */}
-        <Link href="/" className="flex items-center">
+        <Link href={`/${locale}/e-commerce`} className="flex items-center">
           <Image
             src="/logo.png"
             alt="Logo"
@@ -65,7 +65,7 @@ export default function NavECommerce() {
             </NavLink>
           ))}
           <ModeToggle />
-          <LanguageSwitcher />
+          {/* <LanguageSwitcher /> */}
         </div>
         <Sheet open={open} onOpenChange={setOpen}>
           <SheetTrigger asChild className="">
@@ -81,7 +81,7 @@ export default function NavECommerce() {
             <div className="flex flex-col h-full bg-[var(--secondary)] text-[var(--primary)] ">
               <div className="p-4 border-b">
                 <Link
-                  href="/"
+                  href={`/${locale}/e-commerce`}
                   className="flex items-center"
                   onClick={() => setOpen(false)}
                 >
@@ -106,7 +106,7 @@ export default function NavECommerce() {
                   </NavLink>
                 ))}
                 <ModeToggle />
-                <LanguageSwitcher />
+                {/* <LanguageSwitcher /> */}
               </nav>
             </div>
           </SheetContent>
@@ -118,7 +118,6 @@ export default function NavECommerce() {
 
 import { usePathname } from "next/navigation";
 import { ModeToggle } from "./DarkMode";
-import { LanguageSwitcher } from "./LanguageSwitch";
 import { useLocale, useTranslations } from "next-intl";
 type NavLinkProps = React.ComponentProps<typeof Link> & {
   children: React.ReactNode;

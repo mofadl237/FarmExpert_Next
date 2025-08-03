@@ -53,10 +53,21 @@
     "cattle":"Cattles",
     "milk":"Milks",
     "productsCattle":"Our Latest Products Cattle",
+    "productsMilk":"Our Latest Products Milk",
     "cattleName":"Title : ",
     "CattleCategory":"Category : ",
     "cattlePrice":"Price : ",
-    "farmName":"Farm Name : "
+    "farmName":"Farm Name : ",
+    "totalPrice" :"Total Price : ",
+    "totalQuantity":"Total Quantity : ",
+    "milkPrice":"Price Per KG : ",
+    "Notes":"Notes : ",
+    "productionDate":"Production Date : ",
+    "mainSection":"Welcome to our online livestock store We offer a wide variety of high-quality cattle and buffalo, with detailed information about age, weight, and production records. \nOur goal is to make buying and selling easier through a user-friendly interface and a safe, reliable shopping experience.",
+    "mainSectionTitle":"Your Trusted Store for Buying and Selling Livestock",
+    "mainSectionMilkDescription":"We provide 100% fresh and natural milk, sourced from healthy livestock raised with care.  Our milk is rich in nutrients and offers an authentic taste, giving your family health and vitality every day.  ",
+    "mainSectionMilkTitle":"Fresh and Healthy Milk for Your Family"
+
   }
 
 }

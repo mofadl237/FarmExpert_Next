@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
 import { AnimatedHeader } from "../Animation/AnimatedHeader";
 import { AnimatedSection } from "../Animation/AnimatedSection";
-import RenderCattleProducts from "../ECommerce/RenderCattleProducts";
+import RenderCattleProducts from "./RenderCattleProducts";
 import SkeltonProduct from "../Skelton/SkeltonProduct";
 import { Car } from "lucide-react";
 
@@ -36,7 +36,7 @@ const ProductDetails = ({ id }: IProps) => {
     <>
       <Link
         href="/en/e-commerce"
-        className="bg-green-700 text-white rounded-md my-3 w-20 py-5 mx-auto block text-center"
+        className="bg-green-700  text-white rounded-md my-3 w-20 py-5 mx-auto block text-center"
       >
         Back
       </Link>

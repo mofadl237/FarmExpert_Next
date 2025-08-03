@@ -142,3 +142,8 @@ export const CattleECommerceSchema = z.object({
   price: z.string({ message: "Price must be a positive number" }),
   imageUrl: z.instanceof(File, { message: "Image is required" }),
 });
+export const MilkECommerceSchema = z.object({
+ 
+  pricePerKg: z.number({ message: "Price must be a positive number" }),
+  
+});

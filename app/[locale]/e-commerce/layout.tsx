@@ -7,6 +7,8 @@ import {notFound} from 'next/navigation';
 import {routing} from '@/i18n/routing';
 import ReduxProvider from "@/Providers/ReduxProvider";
 import { Toaster } from "sonner";
+import NavECommerce from "@/components/NavECommerce";
+import Footer from "@/components/FooterComponent";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -66,10 +68,12 @@ export default async function RootLayout({
           enableSystem={true}
         >
           <main className="container mx-auto px-5">
-           
+           <NavECommerce/>
           {children}
           <Toaster richColors />
           </main>
+              <Footer/>
+          
         </ThemeProvider>
           </NextIntlClientProvider>
           </ReduxProvider>
