@@ -5,9 +5,11 @@ import { RequestApiSlice } from "./services/Request";
 import { LoginApiSlice } from "./services/Login";
 import { ManagerFarmApiSlice } from "./services/ManagerFarm";
 import { ECommerceApi } from "./services/ECommerce";
+import  cartSlice  from "./Cart/CartSlice";
 
 export const store = configureStore({
   reducer: {
+    cart:cartSlice,
     [FarmApiSlice.reducerPath]: FarmApiSlice.reducer,
     [ManagerApiSlice.reducerPath]: ManagerApiSlice.reducer,
     [RequestApiSlice.reducerPath]:RequestApiSlice.reducer,

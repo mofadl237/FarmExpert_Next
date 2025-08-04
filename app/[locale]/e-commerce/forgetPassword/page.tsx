@@ -14,10 +14,9 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { loginUserSchema } from "@/validation";
+import { forgetPAsswordUserSchema } from "@/validation";
 import { AnimatedHeader } from "@/components/Animation/AnimatedHeader";
 import { usePathname } from "next/navigation";
-import Link from "next/link";
 
 export default function Page() {
   // 1- state
@@ -25,18 +24,17 @@ export default function Page() {
 
   const isArabic = pathname.startsWith("/ar");
 
-  const form = useForm<z.infer<typeof loginUserSchema>>({
-    resolver: zodResolver(loginUserSchema),
+  const form = useForm<z.infer<typeof forgetPAsswordUserSchema>>({
+    resolver: zodResolver(forgetPAsswordUserSchema),
     defaultValues: {
      
       email: "",
-      password: "",
       
     },
   });
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof loginUserSchema>) {
+  function onSubmit(values: z.infer<typeof forgetPAsswordUserSchema>) {
     console.log(values);
   }
 
@@ -51,7 +49,7 @@ export default function Page() {
           } `}
           style={{ clipPath: "polygon(0 0, 100% 0, 80% 100%, 0 100%)" }}
         >
-          <AnimatedHeader title={"LogIn"} center />
+          <AnimatedHeader title={"Forget Password"} center />
           <div className="px-5">
             <Form {...form}>
               <form
@@ -72,37 +70,14 @@ export default function Page() {
                     </FormItem>
                   )}
                 />
-                <FormField
-                  control={form.control}
-                  name="password"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Password </FormLabel>
-                      <FormControl>
-                        <Input type="password" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+                
                 
                 <Button type="submit" className="w-2/3  block">
                   Submit
                 </Button>
               </form>
             </Form>
-            <div className=" mt-4 flex flex-col md:flex-row justify-between  w-full md:w-2/3 ">
-              <Link
-                href={"/en/e-commerce/forgetPassword"}
-                className="text-blue-600 w-full"
-              >
-                Forget Password
-              </Link>
-
-              <Link href={"/en/e-commerce/register"} className="text-blue-600">
-                SignUp
-              </Link>
-            </div>
+            
           </div>
         </div>
       </div>

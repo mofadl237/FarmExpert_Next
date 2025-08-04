@@ -38,7 +38,7 @@ export function AddCattleProduct({ cattle }: IProps) {
   //1- State
   const [open, setOpen] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [addCattleECommerce, { data: details }] =
+  const [addCattleECommerce, ] =
     useAddCattleECommerceMutation();
 
   //2- Handler

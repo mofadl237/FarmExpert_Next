@@ -1,4 +1,3 @@
-
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -15,10 +14,9 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { registerUserSchema } from "@/validation";
+import {  resetPasswordUserSchema } from "@/validation";
 import { AnimatedHeader } from "@/components/Animation/AnimatedHeader";
 import { usePathname } from "next/navigation";
-import Link from "next/link";
 
 export default function Page() {
   // 1- state
@@ -26,18 +24,19 @@ export default function Page() {
 
   const isArabic = pathname.startsWith("/ar");
 
-  const form = useForm<z.infer<typeof registerUserSchema>>({
-    resolver: zodResolver(registerUserSchema),
+  const form = useForm<z.infer<typeof resetPasswordUserSchema>>({
+    resolver: zodResolver(resetPasswordUserSchema),
     defaultValues: {
-      name: "",
+     
       email: "",
-      password: "",
-      confirmPassword: "",
+      code:"",
+      newPassword:""
+      
     },
   });
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof registerUserSchema>) {
+  function onSubmit(values: z.infer<typeof resetPasswordUserSchema>) {
     console.log(values);
   }
 
@@ -52,34 +51,23 @@ export default function Page() {
           } `}
           style={{ clipPath: "polygon(0 0, 100% 0, 80% 100%, 0 100%)" }}
         >
-          <AnimatedHeader title={"Register"} center />
+          <AnimatedHeader title={"Reset Password"} center />
           <div className="px-5">
             <Form {...form}>
               <form
                 onSubmit={form.handleSubmit(onSubmit)}
                 className="space-y-8"
               >
+                
                 <FormField
-                  control={form.control}
-                  name="name"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Username</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Mohamed" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
+                
                   control={form.control}
                   name="email"
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Email</FormLabel>
                       <FormControl>
-                        <Input placeholder="moFadl@gmail.com" {...field} />
+                        <Input placeholder="moFadl@gmail.com" className="border-primary w-[70%]" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -87,12 +75,12 @@ export default function Page() {
                 />
                 <FormField
                   control={form.control}
-                  name="password"
+                  name="code"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Password </FormLabel>
+                      <FormLabel>Code</FormLabel>
                       <FormControl>
-                        <Input type="password" {...field} />
+                        <Input {...field} className="border-primary w-[70%]"/>
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -100,23 +88,25 @@ export default function Page() {
                 />
                 <FormField
                   control={form.control}
-                  name="confirmPassword"
+                  name="newPassword"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Confirm Password</FormLabel>
+                      <FormLabel>New Password </FormLabel>
                       <FormControl>
-                        <Input type="password" {...field} />
+                        <Input  {...field} className="border-primary w-[70%]"/>
                       </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
-                <Button type="submit" className="w-2/3  block">Submit</Button>
+                
+                
+                <Button type="submit" className="w-2/3  block">
+                  Submit
+                </Button>
               </form>
             </Form>
-            <div className=" mt-4 flex flex-col md:flex-row justify-between w-2/3 ">
-              <Link href={"/en/e-commerce/login"}className="text-blue-600">Login</Link>
-            </div>
+            
           </div>
         </div>
       </div>

@@ -49,6 +49,7 @@
   },
   "ECommerce":{
     "login":"LogIn",
+    "logout":"LogOut",
     "register":"Register",
     "cattle":"Cattles",
     "milk":"Milks",

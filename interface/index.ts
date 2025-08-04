@@ -173,6 +173,7 @@ export interface ICattleECommerce {
   farmName: string;
   type: string;
   age: number;
+  Quantity?:number;
 }
 export interface ICattleECommerceResponse {
   currentPage: number;
@@ -190,6 +191,7 @@ export interface IMilkECommerce {
   farmName: string;
   productionDate: Date;
   notes: string;
+  Quantity?:number;
 }
 export interface IMilkECommerceResponse {
   currentPage: number;

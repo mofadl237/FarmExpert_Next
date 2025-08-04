@@ -13,15 +13,30 @@ export default function NavECommerce() {
     //1-State
     const [open, setOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
+      const [mounted, setMounted] = useState(false);
+
     const locale = useLocale();
     const t = useTranslations("");
+    
+
+  const { count } = useSelector((state: RootState) => state.cart);
+
+  useEffect(() => {
+    setMounted(true); 
+  }, [])
+  
     const links = [
       // { path: "vet", label: "Vet" },
       { path: "e-commerce/milk", label: t("ECommerce.milk") },
       { path: "e-commerce/cattle", label: t("ECommerce.cattle") },
-      { path: "e-commerce/login", label: t("ECommerce.login") },
-      { path: "e-commerce/register", label: t("ECommerce.register") },
-      { path: "e-commerce/cart", label: <ShoppingCart/> },
+      ...(scrolled ? [{ path: "e-commerce/login", label: t("ECommerce.login")   },
+      { path: "e-commerce/register", label: t("ECommerce.register") },] : [{ path: "e-commerce/logout", label: t("ECommerce.logout") }] ),
+      // { path: "e-commerce/login", label: t("ECommerce.login") },
+      // { path: "e-commerce/register", label: t("ECommerce.register") },
+      { path: "e-commerce/cart", label: <span className="flex">
+      <ShoppingCart />
+      <span className="text-primary"> {mounted ? count : 0}</span>
+    </span>},
     ];
   useEffect(() => {
     const handleScroll = () => {
@@ -119,6 +134,8 @@ export default function NavECommerce() {
 import { usePathname } from "next/navigation";
 import { ModeToggle } from "./DarkMode";
 import { useLocale, useTranslations } from "next-intl";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
 type NavLinkProps = React.ComponentProps<typeof Link> & {
   children: React.ReactNode;
 };

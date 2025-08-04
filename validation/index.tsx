@@ -46,7 +46,7 @@ export const workerSchema = z.object({
   phone: z.string().regex(/^01[0-2,5]{1}[0-9]{8}$/, {
     message: "Phone must be a valid Egyptian number",
   }),
-  password: z.string().min(1, { message: "Code is required" }),
+  password: z.string().min(1, { message: "Password is required" }),
   specialty: z.string().min(1, { message: "Specialty is required" }),
 
   nationalID: z
@@ -68,27 +68,29 @@ export const CattleSchema = z.object({
     required_error: "Weight is required",
     invalid_type_error: "Weight must be a number",
   }),
-  gender:z.string({message:"Gender Is Required"}),
-  age:z.number({
+  gender: z.string({ message: "Gender Is Required" }),
+  age: z.number({
     required_error: "Age is required",
     invalid_type_error: "Age must be a number",
   }),
 });
 
-
 export const MilkSchema = z.object({
   tagNumber: z.string({
-   message: "Please Enter Cow Id.",
+    message: "Please Enter Cow Id.",
   }),
-  am: z.number({
-  invalid_type_error: "Am must be a number",
-}).optional(),
-  pm: z.number({
-  invalid_type_error: "Pm must be a number",
-}).optional(),
+  am: z
+    .number({
+      invalid_type_error: "Am must be a number",
+    })
+    .optional(),
+  pm: z
+    .number({
+      invalid_type_error: "Pm must be a number",
+    })
+    .optional(),
 
-  notes:z.string({message:"Notes Is Required"}),
- 
+  notes: z.string({ message: "Notes Is Required" }),
 });
 
 export const NotificationSchema = z.object({
@@ -103,7 +105,6 @@ export const NotificationSchema = z.object({
   }),
 });
 
-
 export const EventSchema = z.object({
   EventType: z.string().min(2, {
     message: "Event Type must be",
@@ -111,39 +112,106 @@ export const EventSchema = z.object({
   TagNumber: z.number({
     invalid_type_error: "TagNumber must be a number",
   }),
-  Weight: z.number({
-    invalid_type_error: "Weight must be a number",
-  }).optional(),
-  Notes: z.string().min(2, {
-    message: "Notes must be Required",
-  }).optional(),
-  Medicine: z.string().min(2, {
-    message: "Medicine must be Required",
-  }).optional(),
-  Dosage: z.string().min(2, {
-    message: "Dosage must be Required",
-  }).optional(),
-  WithdrawalTime: z.string().min(2, {
-    message: "WithdrawalTime must be Required",
-  }).optional(),
-  CalfGender: z.string().min(2, {
-    message: "CalfGender must be Required",
-  }).optional(),
-  VaccineType: z.string().min(2, {
-    message: "VaccineType must be Required",
-  }).optional(),
-  Date: z.date({
-    required_error: "Date is required",
-  }).optional(),
+  Weight: z
+    .number({
+      invalid_type_error: "Weight must be a number",
+    })
+    .optional(),
+  Notes: z
+    .string()
+    .min(2, {
+      message: "Notes must be Required",
+    })
+    .optional(),
+  Medicine: z
+    .string()
+    .min(2, {
+      message: "Medicine must be Required",
+    })
+    .optional(),
+  Dosage: z
+    .string()
+    .min(2, {
+      message: "Dosage must be Required",
+    })
+    .optional(),
+  WithdrawalTime: z
+    .string()
+    .min(2, {
+      message: "WithdrawalTime must be Required",
+    })
+    .optional(),
+  CalfGender: z
+    .string()
+    .min(2, {
+      message: "CalfGender must be Required",
+    })
+    .optional(),
+  VaccineType: z
+    .string()
+    .min(2, {
+      message: "VaccineType must be Required",
+    })
+    .optional(),
+  Date: z
+    .date({
+      required_error: "Date is required",
+    })
+    .optional(),
 });
 
 export const CattleECommerceSchema = z.object({
- 
   price: z.string({ message: "Price must be a positive number" }),
   imageUrl: z.instanceof(File, { message: "Image is required" }),
 });
 export const MilkECommerceSchema = z.object({
- 
   pricePerKg: z.number({ message: "Price must be a positive number" }),
+});
+
+export const registerUserSchema = z.object({
+  name: z
+    .string({ message: "Name must be a required value" })
+    .min(2, { message: "Min Character 2" })
+    .max(15, { message: "max Character 15" }),
+  email: z.string().regex(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, {
+    message: "Email must be a valid format like example@email.com",
+  }),
+  password: z
+    .string({ message: "Password is required" })
+    .min(5, { message: "Password min 5 character" }),
+  confirmPassword: z
+    .string({ message: "Confirm Password is required" })
+    .min(5, { message: "Confirm Password min 5 character" }),
+});
+export const loginUserSchema = z.object({
+ 
+  email: z.string().regex(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, {
+    message: "Email must be a valid format like example@email.com",
+  }),
+  password: z
+    .string({ message: "Password is required" })
+    .min(5, { message: "Password min 5 character" }),
+ 
+});
+export const forgetPAsswordUserSchema = z.object({
+ 
+  email: z.string().regex(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, {
+    message: "Email must be a valid format like example@email.com",
+  }),
+ 
+ 
+});
+
+export const resetPasswordUserSchema = z.object({
+  code: z
+    .string({ message: "Code must be a required value" })
+    .min(2, { message: "Min Character 2" })
+    .max(15, { message: "max Character 15" }),
+  email: z.string().regex(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, {
+    message: "Email must be a valid format like example@email.com",
+  }),
+  newPassword: z
+    .string({ message: "Password is required" })
+    .min(5, { message: "Password min 5 character" }),
   
 });

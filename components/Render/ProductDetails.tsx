@@ -13,6 +13,8 @@ import { AnimatedSection } from "../Animation/AnimatedSection";
 import RenderCattleProducts from "./RenderCattleProducts";
 import SkeltonProduct from "../Skelton/SkeltonProduct";
 import { Car } from "lucide-react";
+import { useDispatch } from "react-redux";
+import { cattleProducts } from "@/store/Cart/CartSlice";
 
 interface IProps {
   id: number;
@@ -24,7 +26,12 @@ const ProductDetails = ({ id }: IProps) => {
   const { data: cattlesType, isLoading } = useGetCattleECommerceByTypeQuery({
     type:String(cattle?.type),
   });
-  
+  const dispatch = useDispatch();
+  //2- Handler
+  const onClick =()=>{
+    console.log("Dispatch Cattle ===> ",cattle)
+    dispatch(cattleProducts(cattle!))
+  }
   useEffect(() => {
     if (cattle?.imageUrl) {
       setImgSrc(`https://farmxpertapi.runasp.net${cattle.imageUrl}`);
@@ -58,7 +65,7 @@ const ProductDetails = ({ id }: IProps) => {
 <h2 className="text-4xl text-secondary font-extrabold">
   {cattle?.price?.toLocaleString("en-US")} EGP
 </h2>
-          <Button className="w-full"><Car/> Add To Cart</Button>
+          <Button className="w-full" onClick={onClick}><Car/> Add To Cart</Button>
         </div>
       </div>
       <AnimatedHeader title="Similar Products" center />

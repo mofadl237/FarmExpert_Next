@@ -4,6 +4,8 @@ import { useTranslations } from "next-intl";
 import Image from "next/image";
 
 import { Button } from "../ui/button";
+import { useDispatch } from "react-redux";
+import {  milkProducts } from "@/store/Cart/CartSlice";
 
 interface IProps {
   milk: IMilkECommerce;
@@ -11,7 +13,10 @@ interface IProps {
 
 const RenderMilkProducts = ({ milk }: IProps) => {
   const t = useTranslations("");
-
+const dispatch =useDispatch();
+const addCart =()=>{
+  dispatch(milkProducts(milk))
+}
   return (
     <div className="w-full ">
       <Image
@@ -51,7 +56,7 @@ const RenderMilkProducts = ({ milk }: IProps) => {
           <span className='text-blue-900'>{milk.farmName}</span>
         </p>
       </div>
-      <Button className="w-full mt-3">
+      <Button className="w-full mt-3" onClick={addCart}>
         <Car /> Add To Cart
       </Button>
     </div>
