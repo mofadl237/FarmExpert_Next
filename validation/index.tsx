@@ -179,7 +179,7 @@ export const registerUserSchema = z.object({
   password: z
     .string({ message: "Password is required" })
     .min(5, { message: "Password min 5 character" }),
-  confirmPassword: z
+  ConfirmPassword: z
     .string({ message: "Confirm Password is required" })
     .min(5, { message: "Confirm Password min 5 character" }),
 });
@@ -210,8 +210,8 @@ export const resetPasswordUserSchema = z.object({
   email: z.string().regex(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, {
     message: "Email must be a valid format like example@email.com",
   }),
-  newPassword: z
+  NewPassword: z
     .string({ message: "Password is required" })
-    .min(5, { message: "Password min 5 character" }),
+    .min(8, { message: "Password min 8 character" }),
   
 });

@@ -24,34 +24,28 @@ import { toast } from "sonner";
 export default function Page() {
   // 1- state
   const pathname = usePathname();
-const [loginUser] = useLoginUserMutation()
+  const [loginUser] = useLoginUserMutation();
   const isArabic = pathname.startsWith("/ar");
 
   const form = useForm<z.infer<typeof loginUserSchema>>({
     resolver: zodResolver(loginUserSchema),
     defaultValues: {
-     
       email: "",
       password: "",
-      
     },
   });
 
   // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof loginUserSchema>) {
-    console.log( "Login ====> ", values);
-    try{
-      const {message,token} = await loginUser(values).unwrap();
-      console.log("Message === > ", message);
-      console.log("Token === > ",token);
-      toast.success(message || "Login Success");
-      localStorage.set("User",token);
-
-    }catch (error: unknown) {
-        
+    try {
+      const { token } = await loginUser(values).unwrap();
+      toast.success("Login Success | Navigate To main page");
+      location.href = "/en/e-commerce";
+      localStorage.setItem("User", token);
+    } catch (error: unknown) {
+      
       const errorMessage =
-        (error as   { message: string } ).message ||
-        "Error Login ECommerce.";
+        (error as {data:  {message: string} })?.data?.message || "Error Login ECommerce.";
       toast.error(errorMessage);
     }
   }
@@ -74,7 +68,6 @@ const [loginUser] = useLoginUserMutation()
                 onSubmit={form.handleSubmit(onSubmit)}
                 className="space-y-8"
               >
-                
                 <FormField
                   control={form.control}
                   name="email"
@@ -101,7 +94,7 @@ const [loginUser] = useLoginUserMutation()
                     </FormItem>
                   )}
                 />
-                
+
                 <Button type="submit" className="w-2/3  block">
                   Submit
                 </Button>

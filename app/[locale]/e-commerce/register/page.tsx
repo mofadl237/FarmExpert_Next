@@ -3,7 +3,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
+import {  z } from "zod";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -19,11 +19,13 @@ import { registerUserSchema } from "@/validation";
 import { AnimatedHeader } from "@/components/Animation/AnimatedHeader";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import { useRegisterUserMutation } from "@/store/services/ECommerceAuth";
+import { toast } from "sonner";
 
 export default function Page() {
   // 1- state
   const pathname = usePathname();
-
+const [registerUser] = useRegisterUserMutation()
   const isArabic = pathname.startsWith("/ar");
 
   const form = useForm<z.infer<typeof registerUserSchema>>({
@@ -32,14 +34,28 @@ export default function Page() {
       name: "",
       email: "",
       password: "",
-      confirmPassword: "",
+      ConfirmPassword: "",
     },
   });
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof registerUserSchema>) {
-    console.log(values);
+ async  function onSubmit(values: z.infer<typeof registerUserSchema>) {
+  
+    try {
+      await registerUser(values);
+      toast.success("Navigate To Login | Confirm Email",{duration:8000});
+      location.href = "/en/e-commerce/login";
+      
+    } catch (error: unknown) {
+      
+        const errorMessage =
+          (error as {data:  string})?.data || " Error Login ECommerce.";
+        toast.error(errorMessage);
+     
+
+    }
   }
+
 
   return (
     <section className="bg-gradient-to-tr from-[#68CD75] to-[#2DB683] w-full h-screen  mt-16 flex justify-center items-center">
@@ -100,7 +116,7 @@ export default function Page() {
                 />
                 <FormField
                   control={form.control}
-                  name="confirmPassword"
+                  name="ConfirmPassword"
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Confirm Password</FormLabel>

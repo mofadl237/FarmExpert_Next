@@ -17,11 +17,13 @@ import { Input } from "@/components/ui/input";
 import {  resetPasswordUserSchema } from "@/validation";
 import { AnimatedHeader } from "@/components/Animation/AnimatedHeader";
 import { usePathname } from "next/navigation";
+import { toast } from "sonner";
+import { useResetPasswordMutation } from "@/store/services/ECommerceAuth";
 
 export default function Page() {
   // 1- state
   const pathname = usePathname();
-
+const [resetPassword]=useResetPasswordMutation()
   const isArabic = pathname.startsWith("/ar");
 
   const form = useForm<z.infer<typeof resetPasswordUserSchema>>({
@@ -30,16 +32,26 @@ export default function Page() {
      
       email: "",
       code:"",
-      newPassword:""
+      NewPassword:""
       
     },
   });
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof resetPasswordUserSchema>) {
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof resetPasswordUserSchema>) {
+    console.log(values)
+    try {
+      const { data } = await resetPassword(values);
+      console.log("Data Str ===>  ",data?.str)
+      toast.success( data?.str || "Update Password Success");
+      location.href = "/en/e-commerce";
+    } catch (error: unknown) {
+      
+      const errorMessage =
+        (error as { data: string })?.data || " Error Update Password.";
+      toast.error(errorMessage);
+    }
   }
-
   return (
     <section className="bg-gradient-to-tr from-[#68CD75] to-[#2DB683] w-full h-screen  mt-16 flex justify-center items-center">
       <div
@@ -88,7 +100,7 @@ export default function Page() {
                 />
                 <FormField
                   control={form.control}
-                  name="newPassword"
+                  name="NewPassword"
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>New Password </FormLabel>

@@ -210,4 +210,4 @@ export interface IAddMilkECommerce {
   pricePerKg: number;
 }
 
-export interface IUserResponse { message:string , token: string }
+export interface IUserResponse { success:boolean , token: string }

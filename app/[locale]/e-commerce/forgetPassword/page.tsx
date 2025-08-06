@@ -17,11 +17,13 @@ import { Input } from "@/components/ui/input";
 import { forgetPAsswordUserSchema } from "@/validation";
 import { AnimatedHeader } from "@/components/Animation/AnimatedHeader";
 import { usePathname } from "next/navigation";
+import { useForgetPassWordUserMutation } from "@/store/services/ECommerceAuth";
+import { toast } from "sonner";
 
 export default function Page() {
   // 1- state
   const pathname = usePathname();
-
+const [ forgetPassword]=useForgetPassWordUserMutation()
   const isArabic = pathname.startsWith("/ar");
 
   const form = useForm<z.infer<typeof forgetPAsswordUserSchema>>({
@@ -34,9 +36,24 @@ export default function Page() {
   });
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof forgetPAsswordUserSchema>) {
+  async function onSubmit(values: z.infer<typeof forgetPAsswordUserSchema>) {
     console.log(values);
+   try {
+   const {data} =await forgetPassword(values);
+   
+      toast.success(data?.str ||"Sent Code In Email");
+      location.href = "/en/e-commerce/resetPassword";
+      
+    } catch (error: unknown) {
+      
+        const errorMessage =
+          (error as {data:  string})?.data || " Error Login ECommerce.";
+        toast.error(errorMessage);
+     
+
+    }
   }
+
 
   return (
     <section className="bg-gradient-to-tr from-[#68CD75] to-[#2DB683] w-full h-screen  mt-16 flex justify-center items-center">
