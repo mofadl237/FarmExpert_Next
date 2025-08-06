@@ -31,3 +31,6 @@ export const removeProducts =  () => {
 export const getMaxLength = (str:string) =>{
   return str.slice(0,15);
 }
+
+
+

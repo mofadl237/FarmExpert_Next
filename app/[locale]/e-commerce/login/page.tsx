@@ -18,11 +18,13 @@ import { loginUserSchema } from "@/validation";
 import { AnimatedHeader } from "@/components/Animation/AnimatedHeader";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import { useLoginUserMutation } from "@/store/services/ECommerceAuth";
+import { toast } from "sonner";
 
 export default function Page() {
   // 1- state
   const pathname = usePathname();
-
+const [loginUser] = useLoginUserMutation()
   const isArabic = pathname.startsWith("/ar");
 
   const form = useForm<z.infer<typeof loginUserSchema>>({
@@ -36,8 +38,22 @@ export default function Page() {
   });
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof loginUserSchema>) {
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof loginUserSchema>) {
+    console.log( "Login ====> ", values);
+    try{
+      const {message,token} = await loginUser(values).unwrap();
+      console.log("Message === > ", message);
+      console.log("Token === > ",token);
+      toast.success(message || "Login Success");
+      localStorage.set("User",token);
+
+    }catch (error: unknown) {
+        
+      const errorMessage =
+        (error as   { message: string } ).message ||
+        "Error Login ECommerce.";
+      toast.error(errorMessage);
+    }
   }
 
   return (

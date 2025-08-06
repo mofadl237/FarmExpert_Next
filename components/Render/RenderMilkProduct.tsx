@@ -15,7 +15,13 @@ const RenderMilkProducts = ({ milk }: IProps) => {
   const t = useTranslations("");
 const dispatch =useDispatch();
 const addCart =()=>{
-  dispatch(milkProducts(milk))
+  let UserAuth:string = "";
+if(typeof window !== "undefined"){
+
+   UserAuth = localStorage.getItem("User")!;
+}
+if(!UserAuth) location.href='/en/e-commerce/login'
+  else dispatch(milkProducts(milk))
 }
   return (
     <div className="w-full ">

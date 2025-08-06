@@ -13,17 +13,22 @@ export default function NavECommerce() {
     //1-State
     const [open, setOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
-      const [mounted, setMounted] = useState(false);
+    const [clientSide, setClientSide] = useState(false);
 
     const locale = useLocale();
     const t = useTranslations("");
-    
+
 
   const { count } = useSelector((state: RootState) => state.cart);
-
+// عشان خاطر ام ال Hydration اخره اني اعمله ب  Next واستخدم Local Storage
+{/**
+  // NextJS ====>SSR Not Using LocalStorage Ya STAAAAAA ==>
+  // Another Project Store Data In Server 
+  // Store Token in Cookies ***** Search Refresh Token And Store Token عموما 
+  */}
   useEffect(() => {
-    setMounted(true); 
-  }, [])
+    setClientSide(true); 
+  }, [count])
   
     const links = [
       // { path: "vet", label: "Vet" },
@@ -35,7 +40,7 @@ export default function NavECommerce() {
       // { path: "e-commerce/register", label: t("ECommerce.register") },
       { path: "e-commerce/cart", label: <span className="flex">
       <ShoppingCart />
-      <span className="text-primary"> {mounted ? count : 0}</span>
+      <span className="text-primary"> {clientSide ? count : 0}</span>
     </span>},
     ];
   useEffect(() => {

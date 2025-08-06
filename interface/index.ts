@@ -209,3 +209,5 @@ export interface IAddMilkECommerce {
   milkProductionID: number;
   pricePerKg: number;
 }
+
+export interface IUserResponse { message:string , token: string }
