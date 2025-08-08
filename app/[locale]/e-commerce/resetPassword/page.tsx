@@ -41,10 +41,11 @@ const [resetPassword]=useResetPasswordMutation()
   async function onSubmit(values: z.infer<typeof resetPasswordUserSchema>) {
     console.log(values)
     try {
-      const { data } = await resetPassword(values);
-      console.log("Data Str ===>  ",data?.str)
-      toast.success( data?.str || "Update Password Success");
-      location.href = "/en/e-commerce";
+      await resetPassword(values);
+      
+      toast.success("Update Password Success");
+      
+      location.href = "/en/e-commerce/login";
     } catch (error: unknown) {
       
       const errorMessage =

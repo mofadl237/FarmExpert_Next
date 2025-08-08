@@ -1,9 +1,8 @@
-
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import {  z } from "zod";
+import { z } from "zod";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -25,7 +24,7 @@ import { toast } from "sonner";
 export default function Page() {
   // 1- state
   const pathname = usePathname();
-const [registerUser] = useRegisterUserMutation()
+  const [registerUser] = useRegisterUserMutation();
   const isArabic = pathname.startsWith("/ar");
 
   const form = useForm<z.infer<typeof registerUserSchema>>({
@@ -39,23 +38,23 @@ const [registerUser] = useRegisterUserMutation()
   });
 
   // 2. Define a submit handler.
- async  function onSubmit(values: z.infer<typeof registerUserSchema>) {
-  
+  async function onSubmit(values: z.infer<typeof registerUserSchema>) {
     try {
-      await registerUser(values);
-      toast.success("Navigate To Login | Confirm Email",{duration:8000});
+      await registerUser(values).unwrap();
+      toast.success("Navigate To Login | Confirm Email", { duration: 8000 });
       location.href = "/en/e-commerce/login";
-      
     } catch (error: unknown) {
-      
-        const errorMessage =
-          (error as {data:  string})?.data || " Error Login ECommerce.";
+      let errorMessage;
+      if (typeof error === "object") {
+        errorMessage =
+        (error as { data:{errors:{ConfirmPassword:string[]}} })?.data.errors.ConfirmPassword[0] || " Error Login ECommerce.";
+      } else {
+        errorMessage =
+          (error as { data: string })?.data || " Error Login ECommerce.";
+        }
         toast.error(errorMessage);
-     
-
     }
   }
-
 
   return (
     <section className="bg-gradient-to-tr from-[#68CD75] to-[#2DB683] w-full h-screen  mt-16 flex justify-center items-center">
@@ -127,11 +126,15 @@ const [registerUser] = useRegisterUserMutation()
                     </FormItem>
                   )}
                 />
-                <Button type="submit" className="w-2/3  block">Submit</Button>
+                <Button type="submit" className="w-2/3  block">
+                  Submit
+                </Button>
               </form>
             </Form>
             <div className=" mt-4 flex flex-col md:flex-row justify-between w-2/3 ">
-              <Link href={"/en/e-commerce/login"}className="text-blue-600">Login</Link>
+              <Link href={"/en/e-commerce/login"} className="text-blue-600">
+                Login
+              </Link>
             </div>
           </div>
         </div>

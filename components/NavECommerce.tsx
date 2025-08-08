@@ -14,7 +14,7 @@ export default function NavECommerce() {
     const [open, setOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const [clientSide, setClientSide] = useState(false);
-
+const [User,setUser] = useState("");
     const locale = useLocale();
     const t = useTranslations("");
 
@@ -28,13 +28,14 @@ export default function NavECommerce() {
   */}
   useEffect(() => {
     setClientSide(true); 
-  }, [count])
+    setUser(localStorage.getItem("User")!)
+  }, [count,User])
   
     const links = [
       // { path: "vet", label: "Vet" },
       { path: "e-commerce/milk", label: t("ECommerce.milk") },
       { path: "e-commerce/cattle", label: t("ECommerce.cattle") },
-      ...(scrolled ? [{ path: "e-commerce/login", label: t("ECommerce.login")   },
+      ...(!User ? [{ path: "e-commerce/login", label: t("ECommerce.login")   },
       { path: "e-commerce/register", label: t("ECommerce.register") },] : [{ path: "e-commerce/logout", label: t("ECommerce.logout") }] ),
       // { path: "e-commerce/login", label: t("ECommerce.login") },
       // { path: "e-commerce/register", label: t("ECommerce.register") },

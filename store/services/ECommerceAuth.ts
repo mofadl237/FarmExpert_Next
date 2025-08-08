@@ -32,7 +32,7 @@ export const ECommerceAuthApi = createApi({
             }),
             invalidatesTags:['ECommerceAuth']
         }),
-   resetPassword:build.mutation<{str:string},{email:string,code:string,NewPassword:string }>({
+   resetPassword:build.mutation<{token:string},{email:string,code:string,NewPassword:string }>({
             query:(body)=>({
                 url:'/ResetPasswordWithCode',
                 method:'POST',

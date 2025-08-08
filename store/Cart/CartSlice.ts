@@ -59,11 +59,10 @@ export const cartSlice = createSlice({
         toast.success("Add Success Products");
       }
 
-      // التغرات اللي عاوزها تسمع عند الكل بقا
       state.count = state.milks.length + state.cattels.length;
       state.salaryAll =
         state.milks.reduce(
-          (acc, p) => acc + p.pricePerKg * (p.totalQuantity || 0),
+          (acc, p) => acc + p.pricePerKg * (p.totalQuantity || 0) * (p.Quantity || 0),
           0
         ) + state.cattels.reduce((acc, c) => acc + c.price, 0);
 
@@ -89,7 +88,7 @@ export const cartSlice = createSlice({
       state.count = state.milks.length + state.cattels.length;
       state.salaryAll =
         state.milks.reduce(
-          (acc, p) => acc + p.pricePerKg * (p.totalQuantity || 0),
+          (acc, p) => acc + p.pricePerKg * (p.totalQuantity || 0) * (p.Quantity || 0),
           0
         ) + state.cattels.reduce((acc, c) => acc + c.price, 0);
 
@@ -102,12 +101,12 @@ export const cartSlice = createSlice({
         (p) => p.milkProductID !== action.payload.milkProductID
       );
 
-      toast.success("Delete Success Products");
+      toast.error("Delete Success Products");
 
       state.count = state.milks.length + state.cattels.length;
       state.salaryAll =
         state.milks.reduce(
-          (acc, p) => acc + p.pricePerKg * (p.totalQuantity || 0),
+          (acc, p) => acc + p.pricePerKg * (p.totalQuantity || 0) * (p.Quantity || 0),
           0
         ) + state.cattels.reduce((acc, c) => acc + c.price, 0);
 
@@ -120,18 +119,34 @@ export const cartSlice = createSlice({
         (p) => p.productID !== action.payload.productID
       );
 
-      toast.success("Delete Success Products");
+      toast.error("Delete Success Products");
 
       state.count = state.milks.length + state.cattels.length;
       state.salaryAll =
         state.milks.reduce(
-          (acc, p) => acc + p.pricePerKg * (p.totalQuantity || 0),
+          (acc, p) => acc + p.pricePerKg * (p.totalQuantity || 0) * (p.Quantity || 0),
           0
         ) + state.cattels.reduce((acc, c) => acc + c.price, 0);
 
       localStorage.setItem("productsCattle", JSON.stringify(state.cattels));
       localStorage.setItem("salaryAll", state.salaryAll.toString());
     },
+
+
+     deleteAllProducts: (state) => {
+       localStorage.removeItem("products");
+       localStorage.removeItem("productsCattle");
+       localStorage.removeItem("salaryAll");
+      toast.error("Delete Success All Products");
+      state.count = 0;
+      state.salaryAll =
+        state.milks.reduce(
+          (acc, p) => acc + p.pricePerKg * (p.totalQuantity || 0) * (p.Quantity || 0),
+          0
+        ) + state.cattels.reduce((acc, c) => acc + c.price, 0);
+
+    },
+
   },
 });
 
@@ -140,6 +155,7 @@ export const {
   cattleProducts,
   deleteMilkProducts,
   deleteCattleProducts,
+  deleteAllProducts,
 } = cartSlice.actions;
 
 export default cartSlice.reducer;
