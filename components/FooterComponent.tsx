@@ -62,7 +62,7 @@ export default function Footer() {
 
             <div className="text-sm md:text-xl leading-relaxed">
               Built by <span >Farm Expert Team</span> Copyright © <span className="bg-gradient-to-r from-green-300 via-green-500 to-emerald-600 bg-clip-text text-transparent hover:[]">
-  Mohamed Fadl.
+  Mohamed Fadl.& Mohamed Reda
 </span> Farm Expert
               Team is a leading company specializing in smart farming solutions.
               We provide advanced systems to optimize farm management, ensuring
